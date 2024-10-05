@@ -8,9 +8,11 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
 <body>
-    <div class="w-full min-h-screen bg-green-50">
+    <div class="w-full min-h-screen bg-gray-50">
         @include('layouts.navbar')
-        @yield('content')
+        <div class="flex justify-center my-12">
+            @yield('content')
+        </div>
         @include('layouts.footer')
     </div>
 </body>
