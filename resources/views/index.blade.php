@@ -3,6 +3,7 @@
 @section('title', 'Index')
 
 @section('content')
-    <div class="min-h-screen">
+    <div class="min-h-screen"> 
+        
     </div>
 @endsection
