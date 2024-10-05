@@ -11,6 +11,8 @@ class UserActivity extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'user_activities';
+
     protected $guarded = [];
 
     public function payment(): BelongsTo

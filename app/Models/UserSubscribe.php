@@ -11,6 +11,8 @@ class UserSubscribe extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'user_subscribes';
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id', 'id');

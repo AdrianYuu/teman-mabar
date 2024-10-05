@@ -11,6 +11,8 @@ class UserPriceDetail extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'user_price_details';
+
     protected $guarded = [];
 
     public function game(): BelongsTo

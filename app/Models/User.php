@@ -11,6 +11,8 @@ class User extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'users';
+
     protected $guarded = [];
 
     public function userPriceDetails(): HasMany

@@ -11,6 +11,8 @@ class GameGenre extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'game_genres';
+
     protected $guarded = [];
 
     public function games(): HasMany

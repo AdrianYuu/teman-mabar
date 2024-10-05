@@ -11,6 +11,8 @@ class Order extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'orders';
+
     protected $guarded = [];
 
     public function game(): BelongsTo

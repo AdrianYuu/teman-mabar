@@ -11,6 +11,8 @@ class UserFollow extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'user_follows';
+
     protected $guarded = [];
 
     public function user(): BelongsTo

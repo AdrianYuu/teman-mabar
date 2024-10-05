@@ -11,6 +11,8 @@ class TeamMember extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'team_members';
+
     protected $guarded = [];
 
     public function team(): BelongsTo

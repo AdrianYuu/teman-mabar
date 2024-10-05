@@ -11,6 +11,8 @@ class Payment extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'payments';
+
     protected $guarded = [];
 
     public function userActivities(): HasMany

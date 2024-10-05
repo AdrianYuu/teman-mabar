@@ -12,6 +12,8 @@ class Competition extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'competitions';
+    
     protected $guarded = [];
 
     public function competitionTeams(): HasMany
