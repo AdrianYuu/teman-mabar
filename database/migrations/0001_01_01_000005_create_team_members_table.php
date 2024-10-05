@@ -12,15 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('team_members', function (Blueprint $table) {
-            $table->uuid();
-            $table->uuid('TeamID');
-            $table->uuid('PlayerID');
-            $table->string('Role');
-            $table->boolean('IsActive')->default(true);
+            $table->uuid('team_id');
+            $table->uuid('player_user_id');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('TeamID')->references('id')->on('teams')->onUpdate('cascade');
-            $table->foreign('PlayerID')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('team_id')->references('id')->on('teams')->onUpdate('cascade');
+            $table->foreign('player_user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 

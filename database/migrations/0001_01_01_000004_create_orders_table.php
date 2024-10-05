@@ -13,15 +13,16 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid()->primary();
-            $table->uuid('CustomerID');
-            $table->uuid('GamerID');
-            $table->uuid('GameID');
-            $table->date('Date');
+            $table->uuid('game_id');
+            $table->uuid('gamer_user_id');
+            $table->uuid('customer_user_id');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
             $table->timestamps();
 
-            $table->foreign('CustomerID')->references('id')->on('users')->onUpdate('cascade');
-            $table->foreign('GamerID')->references('id')->on('users')->onUpdate('cascade');
-            $table->foreign('GameID')->references('id')->on('games')->onUpdate('cascade');
+            $table->foreign('game_id')->references('id')->on('games')->onUpdate('cascade');
+            $table->foreign('gamer_user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('customer_user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 

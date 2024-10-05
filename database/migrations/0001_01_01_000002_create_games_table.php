@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->uuid('GenreID');
-            $table->string('Name');
-            $table->string('RentBy');
-            $table->boolean('IsActive')->default(true);
+            $table->uuid('genre_id');
+            $table->string('name')->unique();
+            $table->string('game_picture_url');
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('GenreID')->references('id')->on('game_genres')->onUpdate('cascade');
+            $table->foreign('genre_id')->references('id')->on('game_genres')->onUpdate('cascade');
         });
     }
 

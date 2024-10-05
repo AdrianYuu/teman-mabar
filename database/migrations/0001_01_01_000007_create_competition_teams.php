@@ -11,11 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_genres', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name')->unique();
+        Schema::create('competition_teams', function (Blueprint $table) {
+            $table->uuid('competition_id');
+            $table->uuid('team_id');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('competition_id')->references('id')->on('competitions')->onUpdate('cascade');
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_genres');
+        Schema::dropIfExists('competition_teams');
     }
 };
