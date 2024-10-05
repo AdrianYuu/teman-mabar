@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->uuid('id')->primary();
             $table->uuid('game_id');
             $table->uuid('gamer_user_id');
             $table->uuid('customer_user_id');
-            $table->timestamp('start_time');
-            $table->timestamp('end_time');
+            $table->timestamp('start_time')->nullable();
+            $table->timestamp('end_time')->nullable();
             $table->timestamps();
 
             $table->foreign('game_id')->references('id')->on('games')->onUpdate('cascade');

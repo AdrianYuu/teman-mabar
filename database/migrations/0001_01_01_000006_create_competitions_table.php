@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('competitions', function (Blueprint $table) {
-            $table->uuid()->primary();
+            $table->uuid('id')->primary();
             $table->uuid('organizer_user_id');
             $table->string('name');
             $table->string('description');
@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('organize_user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('organizer_user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 
