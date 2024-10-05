@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('game_genres', function (Blueprint $table) {
-            $table->uuid('id')->primary();
-            $table->string('name')->unique();
+        Schema::create('user_follows', function (Blueprint $table) {
+            $table->uuid('user_id');
+            $table->uuid('followed_user_id');
             $table->timestamps();
             $table->softDeletes();
+
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('followed_user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_genres');
+        Schema::dropIfExists('user_follows');
     }
 };

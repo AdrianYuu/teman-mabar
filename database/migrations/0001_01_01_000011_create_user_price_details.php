@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('teams', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+        Schema::create('user_price_details', function (Blueprint $table) {
+            $table->uuid('user_id');
             $table->uuid('game_id');
-            $table->uuid('leader_user_id');
-            $table->string('name');
-            $table->string('team_picture_url');
-            $table->string('motto');
+            $table->integer('price');
+            $table->string('price_type', 7);
             $table->timestamps();
             $table->softDeletes();
 
+            $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->foreign('game_id')->references('id')->on('games')->onUpdate('cascade');
-            $table->foreign('leader_user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('teams');
+        Schema::dropIfExists('user_price_details');
     }
 };
