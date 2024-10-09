@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('biography')->nullable();
             $table->integer('coin')->default(0);
-            $table->integer('profile_picture_url');
+            $table->string('profile_picture_url')->nullable();
             $table->boolean('is_verified')->default(false);
             $table->integer('follower_count')->default(0);
             $table->integer('subscriber_count')->default(0);
