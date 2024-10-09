@@ -2,13 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Game extends Model
 {
     use HasFactory, SoftDeletes;
     
+    protected $table = 'games';
+
     protected $guarded = [];
+
+    public function gameGenre(): BelongsTo
+    {
+        return $this->belongsTo(GameGenre::class, 'genre_id', 'id');
+    }
+
+    public function userPriceDetails(): HasMany
+    {
+        return $this->hasMany(UserPriceDetail::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }
