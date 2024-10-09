@@ -46,7 +46,7 @@
                 <a href=""><img src={{ asset('assets/images/login/apple.jpg') }} class="w-12 h-12 rounded-full" alt="Apple"></a>
                 <a href=""><img src={{ asset('assets/images/login/facebook.png') }} class="w-12 h-12 rounded-full" alt="Facebook"></a>
             </div>
-            <p class="text-center mt-6">Sudah punya akun? <a href="" class="text-blue-500 font-medium">Register disini</a></p>
+            <p class="text-center mt-6">Belum punya akun? <a href="{{ route('registerPage') }}" class="text-blue-500 font-medium">Register disini</a></p>
         </div>
     </div>
 @endsection
