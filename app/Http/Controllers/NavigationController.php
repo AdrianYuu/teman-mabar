@@ -15,4 +15,9 @@ class NavigationController extends Controller
     {
         return view('login');
     }
+
+    public function registerPage()
+    {
+        return view('register');
+    }
 }

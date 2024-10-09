@@ -24,7 +24,7 @@ return new class extends Migration
             $table->boolean('is_verified')->default(false);
             $table->integer('follower_count')->default(0);
             $table->integer('subscriber_count')->default(0);
-            $table->string('otp_code');
+            $table->string('otp_code')->nullable();
             $table->timestamp('otp_valid_time')->nullable();
             $table->timestamps();
             $table->softDeletes();
