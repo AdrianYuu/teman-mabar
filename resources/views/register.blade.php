@@ -23,6 +23,9 @@
                     </div>
                     <input type="text" id="name-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik nama lengkap kamu disini..." name="name">
                 </div>
+                @error('name')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
                 <label for="email-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Email</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -33,6 +36,9 @@
                     </div>
                     <input type="text" id="email-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik email kamu disini..." name="email">
                 </div>
+                @error('email')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
                 <label for="password-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Kata Sandi</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -42,6 +48,9 @@
                     </div>
                     <input type="password" id="password-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik kata sandi kamu disini..." name="password">
                 </div>
+                @error('password')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
                 <label for="password-confirmation-icon" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white mt-4">Konfirmasi Kata Sandi</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
@@ -51,6 +60,9 @@
                     </div>
                     <input type="password" id="password-confirmation-icon" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Ketik konfirmasi kata sandi kamu disini..." name="password_confirmation">
                 </div>
+                @error('password_confirmation')
+                    <p class="text-red-500">{{ $message }}</p>
+                @enderror
                 <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mt-4">Daftar</button>
             </form>
             <div class="flex items-center my-4">

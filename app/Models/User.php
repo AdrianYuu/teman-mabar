@@ -18,6 +18,10 @@ class User extends Model implements AuthenticatableContract
 
     protected $guarded = [];
 
+    protected $casts = [
+        'password' => 'hashed'
+    ];
+
     public function userPriceDetails(): HasMany
     {
         return $this->hasMany(UserPriceDetail::class);
