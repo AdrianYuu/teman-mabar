@@ -47,7 +47,7 @@
                                 class="whitespace-nowrap px-6 py-4 text-xl font-medium text-gray-900 dark:text-white">
                                 {{ $gameGenre->name }}
                             </th>
-                            <td class="px-6 py-4">
+                            <td class="flex px-6 py-4">
                                 <button type="button"
                                     onclick="window.location.href='{{ route('editGameGenrePage', ['id' => $gameGenre->id]) }}'"
                                     class="mb-2 me-2 rounded-lg bg-yellow-400 px-5 py-2.5 text-sm font-medium text-white hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900">Edit</button>
@@ -64,5 +64,4 @@
         {{ $gameGenres->links('vendor.pagination.tailwind-custom') }}
 
     </div>
-
 @endsection

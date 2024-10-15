@@ -24,13 +24,10 @@ class StoreGameGenreRequest extends FormRequest
     {
         return [
             'name' => [
-                'required',
-                'string',
-                'min:5',
-                'max:20',
+                'required','string','min:5','max:20',
                 Rule::unique('game_genres')->where(function ($query) {
                     return $query->whereNull('deleted_at');
-                })->ignore($this->route('id'))
+                })
             ],
         ];
     }
