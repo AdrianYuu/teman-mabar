@@ -27,15 +27,22 @@ class AuthController extends Controller
         return redirect(route('indexPage'));
     }
 
-    public function login()
+    public function login(Request $request)
     {
+        $credentials = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect(route('indexPage'));
+        }
     }
 
     public function logout()
     {
         Auth::logout();
-
         return redirect(route('loginPage'));
     }
 }
