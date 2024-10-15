@@ -20,4 +20,9 @@ class NavigationController extends Controller
     {
         return view('register');
     }
+
+    public function adminIndexPage()
+    {
+        return view('admin/index');
+    }
 }
