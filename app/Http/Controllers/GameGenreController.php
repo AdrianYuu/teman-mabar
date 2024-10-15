@@ -12,7 +12,7 @@ class GameGenreController extends Controller
 {
     public function index()
     {
-        $gameGenres = GameGenre::paginate(9);
+        $gameGenres = GameGenre::paginate(8);
         
         return view('admin/game-genre/index', compact('gameGenres'));
     }
@@ -28,9 +28,7 @@ class GameGenreController extends Controller
 
         GameGenre::create($validated);
 
-        Session::flash('success', 'Game genre created successfully!');
-
-        return redirect(route('gameGenrePage'));
+        return redirect(route('gameGenrePage'))->with('success', 'Game genre created successfully!');
     }
 
     public function edit($id)
@@ -48,9 +46,7 @@ class GameGenreController extends Controller
 
         $gameGenre->update($validated);
 
-        Session::flash('success', 'Game genre updated successfully!');
-
-        return redirect(route('gameGenrePage'));
+        return redirect(route('gameGenrePage'))->with('success', 'Game genre updated successfully!');
     }
 
     public function delete($id)
@@ -64,8 +60,6 @@ class GameGenreController extends Controller
     {
         GameGenre::destroy($id);
 
-        Session::flash('success', 'Game genre deleted successfully!');
-
-        return redirect(route('gameGenrePage'));
+        return redirect(route('gameGenrePage'))->with('success', 'Game genre deleted successfully!');
     }
 }

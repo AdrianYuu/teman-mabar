@@ -1,6 +1,6 @@
 @extends('layouts.admin-main-layout')
 
-@section('title', 'Admin Dashboard | Edit Game Genre')
+@section('title', 'Admin Dashboard | Delete Game Genre')
 
 @section('content')
 
