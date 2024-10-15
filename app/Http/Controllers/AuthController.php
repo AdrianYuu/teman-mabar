@@ -2,42 +2,43 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
+    public function register(StoreUserRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required|confirmed',
-            'password_confirmation' => 'required'
-        ]);
+        $validated = $request->validated();
+        $validated = collect($validated)->only(['name', 'email', 'password'])->toArray();
 
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-
-        return redirect(route('indexPage'));
-    }
-
-    public function login(Request $request)
-    {
+        User::create($validated);
+        
         $credentials = [
             'email' => $request->email,
-            'password' => $request->password
+            'password' => $request->password,
         ];
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect(route('indexPage'));
         }
+
+        return redirect(route('registerPage'));
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerateToken();
+            return redirect(route('indexPage'));
+        }
+
+        return redirect(route('loginPage'));
     }
 
     public function logout()
