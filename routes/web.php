@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameGenreController;
 use App\Http\Controllers\NavigationController;
 use Illuminate\Support\Facades\Route;
@@ -14,7 +15,13 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [NavigationController::class, 'adminIndexPage'])->name('adminIndexPage');
 
     // GAME
-    Route::get('/game', [NavigationController::class, 'adminItemGamePage'])->name('adminItemGamePage');
+    Route::get('/game', [GameController::class, 'index'])->name('gamePage');
+    Route::get('/game/create', [GameController::class, 'create'])->name('createGamePage');
+    Route::post('/game/create', [GameController::class, 'store'])->name('storeGame');
+    Route::get('/game/edit/{id}', [GameController::class, 'edit'])->name('editGamePage');
+    Route::put('/game/edit/{id}', [GameController::class, 'update'])->name('updateGame');
+    Route::get('/game/delete/{id}', [GameController::class, 'delete'])->name('deleteGamePage');
+    Route::delete('/game/delete/{id}', [GameController::class, 'destroy'])->name('destroyGame');
 
     // GAME GENRE
     Route::get('/game-genre', [GameGenreController::class, 'index'])->name('gameGenrePage');
