@@ -27,11 +27,11 @@ class Game extends Model
 
     public function userPriceDetails(): HasMany
     {
-        return $this->hasMany(UserPriceDetail::class);
+        return $this->hasMany(UserPriceDetail::class, 'game_id', 'id');
     }
 
     public function orders(): HasMany
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(Order::class, 'game_id', 'id');
     }
 }

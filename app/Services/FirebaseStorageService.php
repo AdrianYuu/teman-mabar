@@ -10,12 +10,13 @@ class FirebaseStorageService
     /**
      * Upload a file to Firebase Storage.
      *
-     * @param string $filePath Path to the file in the request.
-     * @param string $fileName Name to save the file as in Firebase Storage.
+     * @param \Illuminate\Http\UploadedFile $file The uploaded file to be stored.
      * @return string The Firebase Storage file URL.
      */
-    public static function uploadImage($filePath, $fileName)
+    public static function uploadImage($file)
     {
+        $fileName = time() . '_' . $file->getClientOriginalName();
+        
         $firebase = (new Factory)
             ->withServiceAccount(storage_path('app/firebase/firebase_credentials.json'))
             ->createStorage();
@@ -24,7 +25,7 @@ class FirebaseStorageService
 
         $firebaseFilePath = 'gameImages/' . $fileName;
 
-        $storage->upload(fopen($filePath, 'r'), ['name' => $firebaseFilePath]);
+        $storage->upload(fopen($file->getRealPath(), 'r'), ['name' => $firebaseFilePath]);
 
         $publicUrl = "https://firebasestorage.googleapis.com/v0/b/"
             . $storage->name()
@@ -32,4 +33,5 @@ class FirebaseStorageService
 
         return $publicUrl;
     }
+    
 }

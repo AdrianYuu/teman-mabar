@@ -19,7 +19,7 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('genre_id')->references('id')->on('game_genres')->onUpdate('cascade');
+            $table->foreign('genre_id')->references('id')->on('game_genres')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

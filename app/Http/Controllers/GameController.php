@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreGameRequest;
+use App\Http\Requests\UpdateGameGenreRequest;
+use App\Http\Requests\UpdateGameRequest;
 use App\Models\Game;
 use App\Models\GameGenre;
 use App\Services\FirebaseStorageService;
@@ -28,9 +30,10 @@ class GameController extends Controller
     {
         $validated = $request->validated();
 
-        $file = $request->file('game_picture');
-        $fileName = time() . '_' . $file->getClientOriginalName();
-        $fileUrl = FirebaseStorageService::uploadImage($file->getRealPath(), $fileName);
+        if($request->hasFile('game_picture')){
+            $file = $request->file('game_picture');
+            $fileUrl = FirebaseStorageService::uploadImage($file);
+        }
 
         Game::create([
             'genre_id' => $validated['genre_id'],
@@ -41,23 +44,48 @@ class GameController extends Controller
         return redirect(route('gamePage'))->with('success', 'Game created successfully!');
     }
 
-    public function edit()
+    public function edit($id)
     {
+        $game = Game::findOrFail($id);
+        $gameGenres = GameGenre::where('id', '<>', $game->genre_id);
 
+        return view('admin/game/edit', compact(['game', 'gameGenres']));
     }
 
-    public function update()
+    public function update(UpdateGameRequest $request, $id)
     {
+        $validated = $request->validated();
 
+        $game = Game::findOrFail($id);
+
+        $game->update([
+            'genre_id' => $validated['genre_id'],
+            'name' => $validated['name'],
+        ]);
+
+        if($request->hasFile('game_picture')){
+            $file = $request->file('game_picture');
+            $fileUrl = FirebaseStorageService::uploadImage($file);
+
+            $game->update([
+                'game_picture_url' => $fileUrl,
+            ]);
+        }
+
+        return redirect(route('gamePage'))->with('success', 'Game updated successfully!');
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $game = Game::findOrFail($id);
 
+        return view('admin/game/delete', compact('game'));
     }
 
-    public function destroy()
+    public function destroy($id)
     {
+        Game::destroy($id);
         
+        return redirect(route('gamePage'))->with('success', 'Game deleted successfully!');
     }
 }

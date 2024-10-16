@@ -27,7 +27,7 @@
         </div>
 
         @if ($games->isEmpty())
-            <p class="mt-2 text-center">There is no game genre yet!</p>
+            <p class="mt-2 text-center">There is no game yet!</p>
         @else
             <table class="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
                 <thead class="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">

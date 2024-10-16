@@ -24,66 +24,66 @@ class User extends Model implements AuthenticatableContract
 
     public function userPriceDetails(): HasMany
     {
-        return $this->hasMany(UserPriceDetail::class);
+        return $this->hasMany(UserPriceDetail::class, 'user_id', 'id');
     }
 
     public function competitions(): HasMany
     {
-        return $this->hasMany(Competition::class);
+        return $this->hasMany(Competition::class, 'organizer_user_id', 'id');
     }
 
     public function teams(): HasMany
     {
-        return $this->hasMany(Team::class);
+        return $this->hasMany(Team::class, 'leader_user_id', 'id');
     }
 
     public function teamMembers(): HasMany
     {
-        return $this->hasMany(TeamMember::class);
+        return $this->hasMany(TeamMember::class, 'player_user_id', 'id');
     }
 
     public function userActivities(): HasMany
     {
-        return $this->hasMany(UserActivity::class);
+        return $this->hasMany(UserActivity::class, 'user_id', 'id');
     }
 
     public function userReviewsAsGamer(): HasMany
     {
-        return $this->hasMany(UserReview::class, 'gamer_user_id');
+        return $this->hasMany(UserReview::class, 'gamer_user_id', 'id');
     }
 
     public function userReviewsAsCustomer(): HasMany
     {
-        return $this->hasMany(UserReview::class, 'customer_user_id');
+        return $this->hasMany(UserReview::class, 'customer_user_id', 'id');
     }
 
     public function ordersAsGamer(): HasMany
     {
-        return $this->hasMany(Order::class, 'gamer_id');
+        return $this->hasMany(Order::class, 'gamer_id', 'id');
     }
 
     public function ordersAsCustomer(): HasMany
     {
-        return $this->hasMany(Order::class, 'customer_id');
+        return $this->hasMany(Order::class, 'customer_id', 'id');
     }
 
     public function userFollowsAsUser(): HasMany
     {
-        return $this->hasMany(UserFollow::class, 'user_id');
+        return $this->hasMany(UserFollow::class, 'user_id', 'id');
     }
 
     public function userFollowsAsFollowed(): HasMany
     {
-        return $this->hasMany(UserFollow::class, 'followed_user_id');
+        return $this->hasMany(UserFollow::class, 'followed_user_id', 'id');
     }
 
     public function userSubscribesAsUser(): HasMany
     {
-        return $this->hasMany(UserFollow::class, 'user_id');
+        return $this->hasMany(UserSubscribe::class, 'user_id', 'id');
     }
 
     public function userSubscribesAsSubscribed(): HasMany
     {
-        return $this->hasMany(UserFollow::class, 'subscribed_user_id');
+        return $this->hasMany(UserSubscribe::class, 'subscribed_user_id', 'id');
     }
 }

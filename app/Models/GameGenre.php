@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,6 +19,15 @@ class GameGenre extends Model
 
     public function games(): HasMany
     {
-        return $this->hasMany(Game::class);
+        return $this->hasMany(Game::class, 'genre_id', 'id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($gameGenre) {
+            $gameGenre->games()->update(['deleted_at' => Carbon::now()]);
+        });
     }
 }
