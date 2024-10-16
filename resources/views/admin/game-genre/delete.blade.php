@@ -11,7 +11,7 @@
             <label for="name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Genre Name</label>
             <input type="text" id="name" name="name"
                 class="block w-full cursor-not-allowed rounded-lg border border-gray-300 bg-gray-100 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-                disabled readonly placeholder="Input new genre name..." value="{{ $gameGenre->name }}" />
+                disabled readonly value="{{ $gameGenre->name }}" />
         </div>
         <button type="submit" id="disabled-input-2"
             class="mb-2 me-1 rounded-lg bg-red-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>

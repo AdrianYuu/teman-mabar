@@ -18,6 +18,6 @@ class Payment extends Model
 
     public function userActivities(): HasMany
     {
-        return $this->hasMany(UserActivity::class);
+        return $this->hasMany(UserActivity::class, 'payment_id', 'id');
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGameRequest extends FormRequest
+class UpdateGameRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class StoreGameRequest extends FormRequest
         return true;
     }
 
-    /**       
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -28,13 +28,13 @@ class StoreGameRequest extends FormRequest
                 'required','string','min:5','max:20',
                 Rule::unique('games')->where(function ($query) {
                     return $query->whereNull('deleted_at');
-                })
+                })->ignore($this->route('id'))
             ],
-            'game_picture' => 'required|image|mimes:jpg,png,jpeg|max:2048'
+            'game_picture' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }
 
-     /**
+    /**
      * Get custom messages for validation errors.
      *
      * @return array
@@ -47,10 +47,8 @@ class StoreGameRequest extends FormRequest
             'name.min' => 'The game name must be at least 5 characters.',
             'name.max' => 'The game name must only have a maximum of 20 characters.',
             'name.unique' => 'Them game name is already exists.',
-            'game_picture.required' => 'The game picture is required.',
             'game_picture.mimes' => 'The game picture file must be either .jpg, .png, or .jpeg.',
             'game_picture.max' => 'The game picture file size must not more than 2mb.'
         ];
     }
-
 }

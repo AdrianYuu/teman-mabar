@@ -19,7 +19,7 @@ class Team extends Model
 
     public function competitionTeams(): HasMany
     {
-        return $this->hasMany(CompetitionTeam::class);
+        return $this->hasMany(CompetitionTeam::class, 'team_id', 'id');
     }
 
     public function user(): BelongsTo
@@ -29,7 +29,7 @@ class Team extends Model
     
     public function teamMembers(): HasMany
     {
-        return $this->hasMany(TeamMember::class);
+        return $this->hasMany(TeamMember::class, 'team_id', 'id');
     }
 
     public function game(): BelongsTo
