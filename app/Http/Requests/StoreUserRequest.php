@@ -74,7 +74,7 @@ class StoreUserRequest extends FormRequest
             'password.regex:/[A-Z]/' => 'Kata sandi harus mengandung setidaknya satu huruf besar.',
             'password.regex:/[@$!%*?&#]/' => 'Kata sandi harus mengandung setidaknya satu karakter spesial.',
             'password_confirmation.required' => 'Kolom konfirmasi kata sandi wajib diisi ',
-            'password_confirmation.same:password' => 'Kolom konfirmasi kata sandi harus sama dengan kolom kata sandi'
+            'password_confirmation.same' => 'Kolom konfirmasi kata sandi harus sama dengan kolom kata sandi'
         ];
     }
 }
