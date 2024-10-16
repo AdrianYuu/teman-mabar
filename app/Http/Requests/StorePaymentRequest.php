@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGameGenreRequest extends FormRequest
+class StorePaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -40,10 +40,10 @@ class StoreGameGenreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The genre name is required to be filled.',
-            'name.unique' => 'The genre name must be unique.',
-            'name.min' => 'The genre name must be at least 5 characters.',
-            'name.max' => 'The genre name must only have a maximum of 20 characters.'
+            'name.required' => 'The payment name is required to be filled.',
+            'name.unique' => 'The payment name must be unique.',
+            'name.min' => 'The payment name must be at least 5 characters.',
+            'name.max' => 'The payment name must only have a maximum of 20 characters.'
         ];
     }
 }

@@ -49,5 +49,4 @@ class UpdateGameGenreRequest extends FormRequest
             'name.max' => 'The genre name must only have a maximum of 20 characters.'
         ];
     }
-
 }

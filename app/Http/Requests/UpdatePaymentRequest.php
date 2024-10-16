@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreGameGenreRequest extends FormRequest
+class UpdatePaymentRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +15,7 @@ class StoreGameGenreRequest extends FormRequest
         return true;
     }
 
-    /**
+   /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
@@ -24,10 +24,13 @@ class StoreGameGenreRequest extends FormRequest
     {
         return [
             'name' => [
-                'required','string','min:5','max:20',
+                'required',
+                'string',
+                'min:5',
+                'max:20',
                 Rule::unique('game_genres')->where(function ($query) {
                     return $query->whereNull('deleted_at');
-                })
+                })->ignore($this->route('id'))
             ],
         ];
     }
@@ -40,10 +43,10 @@ class StoreGameGenreRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'The genre name is required to be filled.',
-            'name.unique' => 'The genre name must be unique.',
-            'name.min' => 'The genre name must be at least 5 characters.',
-            'name.max' => 'The genre name must only have a maximum of 20 characters.'
+            'name.required' => 'The payment name is required to be filled.',
+            'name.unique' => 'The payment name must be unique.',
+            'name.min' => 'The payment name must be at least 5 characters.',
+            'name.max' => 'The payment name must only have a maximum of 20 characters.'
         ];
     }
 }

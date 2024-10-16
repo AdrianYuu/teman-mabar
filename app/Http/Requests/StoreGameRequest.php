@@ -52,5 +52,4 @@ class StoreGameRequest extends FormRequest
             'game_picture.max' => 'The game picture file size must not more than 2mb.'
         ];
     }
-
 }
