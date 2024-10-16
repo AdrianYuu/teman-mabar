@@ -38,12 +38,12 @@ class AuthController extends Controller
             return redirect(route('indexPage'));
         }
 
-        return redirect(route('loginPage'));
+        return redirect(route('loginPage'))->withErrors('error', "Invalid Creds");
     }
 
     public function logout()
     {
         Auth::logout();
-        return redirect(route('loginPage'));
+        return redirect()->back();
     }
 }
