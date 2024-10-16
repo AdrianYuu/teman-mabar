@@ -4,6 +4,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameGenreController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 // Navigation
@@ -11,7 +13,14 @@ Route::get('/', [NavigationController::class, 'indexPage'])->name('indexPage');
 Route::get('/login', [NavigationController::class, 'loginPage'])->name('loginPage');
 Route::get('/register', [NavigationController::class, 'registerPage'])->name('registerPage');
 
+// Auth
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// ADMIN
 Route::prefix('admin')->group(function () {
+    // INDEX
     Route::get('/', [NavigationController::class, 'adminIndexPage'])->name('adminIndexPage');
 
     // GAME
@@ -33,10 +42,14 @@ Route::prefix('admin')->group(function () {
     Route::delete('/game-genre/delete/{id}', [GameGenreController::class, 'destroy'])->name('destroyGameGenre');
 
     // PAYMENT
-    Route::get('/payment', [NavigationController::class, 'adminItemPaymentPage'])->name('adminItemPaymentPage');
-});
+    Route::get('/payment', [PaymentController::class, 'index'])->name('paymentPage');
+    Route::get('/payment/create', [PaymentController::class, 'create'])->name('createPaymentPage');
+    Route::post('/payment/create', [PaymentController::class, 'store'])->name('storePayment');
+    Route::get('/payment/edit/{id}', [PaymentController::class, 'edit'])->name('editPaymentPage');
+    Route::put('/payment/edit/{id}', [PaymentController::class, 'update'])->name('updatePayment');
+    Route::get('/payment/delete/{id}', [PaymentController::class, 'delete'])->name('deletePaymentPage');
+    Route::delete('/payment/delete/{id}', [PaymentController::class, 'destroy'])->name('destroyPayment');
 
-// Auth
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    // USER
+    Route::get('/user', [UserController::class, 'index'])->name('userPage');
+});
