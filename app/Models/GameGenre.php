@@ -27,7 +27,7 @@ class GameGenre extends Model
         parent::boot();
 
         static::deleting(function ($gameGenre) {
-            $gameGenre->games()->update(['deleted_at' => Carbon::now()]);
+            $gameGenre->games()->delete();
         });
     }
 }

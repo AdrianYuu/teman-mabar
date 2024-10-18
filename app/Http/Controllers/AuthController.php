@@ -22,7 +22,6 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            // $request->session()->regenerate(); //Used when SESSION_DRIVER=database
             return redirect(route('indexPage'));
         }
 
@@ -34,7 +33,6 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            // $request->session()->regenerate(); //Used when SESSION_DRIVER=database
             return redirect(route('indexPage'));
         }
 
