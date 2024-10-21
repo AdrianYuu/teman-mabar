@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Game;
+use App\Models\GameGenre;
+
 class NavigationController extends Controller
 {
     public function indexPage() 
     {
-        return view('index');
+        $genres = GameGenre::all()->sortBy('name')->take(8);
+        $games = Game::all();
+        return view('index', compact('genres', 'games'));
     }
 
     public function loginPage()
