@@ -23,6 +23,16 @@ class NavigationController extends Controller
     {
         return view('register');
     }
+    
+    public function gameListPage()
+    {
+        return view('game-list');
+    }
+
+    public function profilePage()
+    {
+        return view('profile');
+    }
 
     public function adminIndexPage()
     {

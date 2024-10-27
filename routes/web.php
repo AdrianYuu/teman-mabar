@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [NavigationController::class, 'indexPage'])->name('indexPage');
 Route::get('/login', [NavigationController::class, 'loginPage'])->name('loginPage');
 Route::get('/register', [NavigationController::class, 'registerPage'])->name('registerPage');
+Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameListPage');
+Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
 
 // Auth
 Route::post('/register', [AuthController::class, 'register'])->name('register');

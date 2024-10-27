@@ -36,7 +36,7 @@ class AuthController extends Controller
             return redirect(route('indexPage'));
         }
 
-        return redirect(route('loginPage'))->withErrors('error', "Invalid Creds");
+        return redirect(route('loginPage'))->withErrors(['invalidCredentials' => "Email atau kata sandi yang Anda masukkan salah!!"]);
     }
 
     public function logout()
