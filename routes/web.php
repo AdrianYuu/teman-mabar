@@ -20,6 +20,9 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// CUSTOMER
+Route::put('/profile/update', [UserController::class, 'update'])->name('updateUser');
+
 // ADMIN
 Route::prefix('admin')->group(function () {
     // INDEX
