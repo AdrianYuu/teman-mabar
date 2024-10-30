@@ -41,11 +41,11 @@
                         </div>
                         <div class="flex items-center">
                             <label class="w-1/3 text-md">Jenis Kelamin</label>
-                            <div class="flex items-center ps-4 border w-1/3 border-gray-200 rounded dark:border-gray-700">
+                            <div class="flex items-center ps-4 border w-1/3 max-h-8 border-gray-200 rounded dark:border-gray-700">
                                 <input id="bordered-radio-1" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="Laki-laki" name="gender" {{ Auth::user()->gender === "Laki-laki" ? 'checked' : ''}}>
                                 <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm text-gray-900 dark:text-gray-300">Laki-laki</label>
                             </div>
-                            <div class="flex items-center ps-4 border w-1/3 border-gray-200 rounded dark:border-gray-700">
+                            <div class="flex items-center ps-4 border w-1/3 max-h-8 border-gray-200 rounded dark:border-gray-700">
                                 <input id="bordered-radio-2" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="Perempuan" name="gender" {{ Auth::user()->gender === "Perempuan" ? 'checked' : ''}}>
                                 <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm text-gray-900 dark:text-gray-300">Perempuan</label>
                             </div>
@@ -71,8 +71,13 @@
                     </form>
                 </div>
                 <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="album" role="tabpanel" aria-labelledby="dashboard-tab">
-                    <p class="text-sm text-gray-500 dark:text-gray-400">This is some placeholder content the <strong class="font-medium text-gray-800 dark:text-white">Dashboard tab's associated content</strong>. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling.</p>
-                </div>
+                    <div class="grid grid-cols-3 gap-4">
+                        <img class="h-full w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
+                        <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
+                        <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
+                        <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
+                    </div>
+                </div>                
             </div>
         </div>
     </div>

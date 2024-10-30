@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\GameGenre;
+use Illuminate\Http\Request;
 
 class NavigationController extends Controller
 {
@@ -37,5 +38,15 @@ class NavigationController extends Controller
     public function adminIndexPage()
     {
         return view('admin/index');
+    }
+
+    public function competitionPage(Request $request)
+    {
+        return view('competition/index');
+    }
+
+    public function competitionDetailPage()
+    {
+        return view('competition/detail');
     }
 }

@@ -14,6 +14,8 @@ Route::get('/login', [NavigationController::class, 'loginPage'])->name('loginPag
 Route::get('/register', [NavigationController::class, 'registerPage'])->name('registerPage');
 Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameListPage');
 Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
+Route::get('/competition', [NavigationController::class, 'competitionPage'])->name('competitionPage');
+Route::get('/competition/detail', [NavigationController::class, 'competitionDetailPage'])->name('competitionDetailPage');
 
 // Auth
 Route::post('/register', [AuthController::class, 'register'])->name('register');
