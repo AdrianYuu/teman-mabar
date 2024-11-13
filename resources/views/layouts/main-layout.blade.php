@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="min-h-screen w-full bg-gray-50">
+    <div class="min-h-screen w-full bg-gray-50 flex flex-col justify-between">
         @include('layouts.navbar')
         <div class="my-12 flex justify-center">
             @yield('content')

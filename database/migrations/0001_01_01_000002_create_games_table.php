@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->uuid('genre_id');
             $table->string('name');
-            $table->string('game_picture_url');
+            $table->string('game_picture_url')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
