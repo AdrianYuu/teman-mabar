@@ -15,7 +15,6 @@ return new class extends Migration
             $table->uuid('user_id');
             $table->uuid('game_id');
             $table->integer('price');
-            $table->string('price_type', 7);
             $table->timestamps();
             $table->softDeletes();
 

@@ -30,6 +30,7 @@ class StoreGameRequest extends FormRequest
                     return $query->whereNull('deleted_at');
                 })
             ],
+            'pricing_type' => 'in:Match,Menit',
             'game_picture' => 'required|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }

@@ -35,8 +35,10 @@ class NavigationController extends Controller
     public function profilePage()
     {
         $userGames = UserPriceDetail::where('user_id', Auth::user()->id)->get();
+        $gameIds = $userGames->pluck('game_id');
+        $games = Game::whereNotIn('id', $gameIds)->get();
 
-        return view('profile', compact('userGames'));
+        return view('profile', compact('userGames', 'games'));
     }
 
     public function adminIndexPage()
