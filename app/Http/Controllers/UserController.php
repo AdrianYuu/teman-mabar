@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserPriceDetail;
 use App\Services\FirebaseStorageService;
 use DateTime;
 use Illuminate\Http\Request;
@@ -26,6 +27,17 @@ class UserController extends Controller
         }
 
         User::findOrFail(Auth::user()->id)->update($input);
+
+        return back();
+    }
+    
+    public function updateGamePrice(Request $request)
+    {
+        UserPriceDetail::where('user_id', 'LIKE', Auth::user()->id)
+            ->where('game_id', 'LIKE', $request->id)
+            ->update([
+                'price' => $request->price
+            ]);
 
         return back();
     }

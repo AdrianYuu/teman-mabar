@@ -86,22 +86,18 @@
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow p-4 mt-4">
             <h1 class="text-2xl font-medium">Game yang dimainkan</h1>
             <div class="flex flex-row overflow-x-auto whitespace-nowrap gap-x-4 py-4">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                <img class="w-1/6 rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
+                @foreach ($userGames as $userGame)
+                    <img class="game-img w-1/6 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                @endforeach
             </div>
-            <h1 class="mt-8">Taraf Bermain Valorant</h1>
-            <form class="flex flex-col gap-4">
+            <h1 class="mt-8" id="title">Taraf Bermain -</h1>
+            <form action="{{ route('updateGamePrice') }}" method="POST"  class="flex flex-col gap-4">
+                @method('PUT')
+                @csrf
                 <div class="flex flex-row items-center mt-4 gap-4">
                     <p>Per Match</p>
-                    <input type="text" value="0" class="w-1/12 h-8">
+                    <input type="text" id="price" value=0 class="w-1/12 h-8 px-2" name="price">
+                    <input type="text" id="id" value="" class="hidden" name="id">
                     <svg class="w-10 h-10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_430_4)">
                             <path d="M11.4164 10.7811C13.6525 8.00684 13.7518 4.37691 11.6383 2.67342C9.52484 0.969931 5.99882 1.83796 3.76275 4.61222C1.52668 7.38648 1.42732 11.0164 3.54081 12.7199C5.6543 14.4234 9.18032 13.5554 11.4164 10.7811Z" fill="#FCEA2B"/>
@@ -120,16 +116,45 @@
                     </svg>
                 </div>
                 <div class="flex justify-start">
-                    <button type="submit" id="update-button" class="text-white bg-blue-600 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update Harga</button>
+                    <button type="submit" id="update-price-button" class="text-white bg-blue-900 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-not-allowed" disabled>Update Harga</button>
                 </div>
             </form>
         </div>
     </div>
 
     <script>
-        function uploadPicture(input){
+        function uploadPicture(input)
+        {
             var form = document.getElementById('form-file');
             form.submit();
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const images = document.querySelectorAll('.game-img');
+
+            images.forEach(image => {
+                image.addEventListener('click', (e) => {
+                    const id = e.target.getAttribute('id');
+                    const price = e.target.getAttribute('price');
+                    const name = e.target.getAttribute('title');
+                    
+                    const idInput = document.getElementById('id');
+                    const priceInput = document.getElementById('price');
+                    const titleElement = document.getElementById('title');
+                    const button = document.getElementById('update-price-button');
+
+                    if (priceInput && titleElement) {
+                        idInput.value = id;
+                        priceInput.value = price;
+                        titleElement.textContent = 'Taraf Bermain ' + name;
+                        button.disabled = false;
+                        button.classList.remove('bg-blue-900');
+                        button.classList.remove('cursor-not-allowed');
+                        button.classList.add('bg-blue-600');
+                        button.classList.add('hover:bg-blue-700');
+                    }
+                });
+            });
+        });
     </script>
 @endsection

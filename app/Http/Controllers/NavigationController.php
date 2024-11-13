@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\GameGenre;
+use App\Models\UserPriceDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NavigationController extends Controller
 {
@@ -32,7 +34,9 @@ class NavigationController extends Controller
 
     public function profilePage()
     {
-        return view('profile');
+        $userGames = UserPriceDetail::where('user_id', Auth::user()->id)->get();
+
+        return view('profile', compact('userGames'));
     }
 
     public function adminIndexPage()
