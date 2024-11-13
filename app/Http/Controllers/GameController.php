@@ -32,7 +32,8 @@ class GameController extends Controller
 
         $game = Game::create([
             'genre_id' => $validated['genre_id'],
-            'name' => $validated['name']
+            'name' => $validated['name'],
+            'price_type' => $validated['pricing_type']
         ]);
         
         if($request->hasFile('game_picture')){
@@ -63,6 +64,7 @@ class GameController extends Controller
         $game->update([
             'genre_id' => $validated['genre_id'],
             'name' => $validated['name'],
+            'price_type' => $validated['pricing_type']
         ]);
 
         if($request->hasFile('game_picture')){

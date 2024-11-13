@@ -30,6 +30,7 @@ class UpdateGameRequest extends FormRequest
                     return $query->whereNull('deleted_at');
                 })->ignore($this->route('id'))
             ],
+            'pricing_type' => 'in:Match,Menit',
             'game_picture' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
         ];
     }

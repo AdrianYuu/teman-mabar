@@ -6,7 +6,7 @@
     <div class="flex flex-col w-1/2">
         <div class="flex w-full gap-12">
             {{-- Left Side --}}
-            <div class="w-2/3 bg-blue-50 flex flex-col justify-between items-center justi border border-gray-200 rounded-lg shadow p-4">
+            <div class="w-2/3 bg-white flex flex-col justify-between items-center justi border border-gray-200 rounded-lg shadow p-4">
                 <img class="rounded-lg h-full" src="{{ Auth::user()->profile_picture_url }}" alt="" />
                 <form action="{{ route('upload') }}" method="POST" class="mt-6 w-full" id="form-file" enctype="multipart/form-data">
                     @method('PUT')
@@ -84,17 +84,70 @@
             </div>
         </div>
         <div class="w-full bg-white border border-gray-200 rounded-lg shadow p-4 mt-4">
-            <h1 class="text-2xl font-medium">Game yang dimainkan</h1>
-            <div class="flex flex-row overflow-x-auto whitespace-nowrap gap-x-4 py-4">
-                @foreach ($userGames as $userGame)
-                    <img class="game-img w-1/6 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                @endforeach
+            <div class="flex justify-between">
+                <h1 class="text-2xl font-medium">Game yang dimainkan</h1>
+                <button onclick="showPrivacyModal()" type="button" class="flex items-center justify-center focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/>
+                    </svg>
+                </button>
             </div>
-            <h1 class="mt-8" id="title">Taraf Bermain -</h1>
+            <div class="flex flex-row items-center overflow-x-auto overflow-y-hidden whitespace-nowrap gap-x-4 py-4 h-1/2">
+                @if ($userGames->isEmpty())
+                    <div id="toast-warning" class="flex justify-center items-center w-1/2 h-1/2 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 m-auto" role="alert">
+                        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
+                            </svg>
+                            <span class="sr-only">Warning icon</span>
+                        </div>
+                        <div class="ms-3 text-sm font-normal">Daftar permainan belum ditambahkan.</div>
+                    </div>
+                @else
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                @endif
+            </div>
+            <div id="info-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+                <div class="relative p-4 w-full max-w-lg h-full md:h-auto">
+                    <form action="{{ route('storeUserPriceDetail') }}" method="POST" class="flex flex-col justify-between relative p-4 bg-white rounded-lg shadow  dark:bg-gray-800 md:p-8 gap-y-4">
+                        @csrf
+                        <div class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Tambah Permainan</h3>
+                        </div>
+                        <div>
+                            <label for="game_id" class="mb-2 block text-sm text-gray-900 dark:text-white">Permainan</label>
+                            <select id="game_id" name="game_id"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                                <option value="" selected>Please select one...</option>
+                                @foreach ($games as $game)
+                                    <option value={{ $game->id }} price_type={{ $game->price_type }}>{{ $game->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <label for="price-type-disabled-input" class="block mb-2 text-sm text-gray-900 dark:text-white">Tipe</label>
+                            <input type="text" id="price-type-disabled-input" aria-label="disabled input" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                        </div>
+                        <div>
+                            <label for="price" class="block mb-2 text-sm text-gray-900 dark:text-white">Harga</label>
+                            <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="10" name="price"/>
+                        </div> 
+                        <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">
+                            <div class="justify-center items-center sm:space-x-4 sm:flex sm:space-y-0">
+                                <button id="close-modal" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Batal</button>
+                                <button id="confirm-button" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
             <form action="{{ route('updateGamePrice') }}" method="POST"  class="flex flex-col gap-4">
                 @method('PUT')
                 @csrf
-                <div class="flex flex-row items-center mt-4 gap-4">
+                <h1 id="title">Tarif Bermain -</h1>
+                <div class="flex flex-row items-center gap-4">
                     <p>Per Match</p>
                     <input type="text" id="price" value=0 class="w-1/12 h-8 px-2" name="price">
                     <input type="text" id="id" value="" class="hidden" name="id">
@@ -129,6 +182,26 @@
             form.submit();
         }
 
+        function showPrivacyModal() {
+            privacyModal.show();
+        }
+
+        const modalEl = document.getElementById('info-popup');
+        const privacyModal = new Modal(modalEl, {
+            placement: 'center'
+        });
+
+        const closeModalEl = document.getElementById('close-modal');
+        closeModalEl.addEventListener('click', function() {
+            privacyModal.hide();
+        });
+
+        document.getElementById('game_id').addEventListener('change', function() {
+            var selectedOption = this.options[this.selectedIndex];
+            var price = selectedOption.getAttribute('price_type');
+            document.getElementById('price-type-disabled-input').value = price;
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const images = document.querySelectorAll('.game-img');
 
@@ -146,7 +219,7 @@
                     if (priceInput && titleElement) {
                         idInput.value = id;
                         priceInput.value = price;
-                        titleElement.textContent = 'Taraf Bermain ' + name;
+                        titleElement.textContent = 'Tarif Bermain ' + name;
                         button.disabled = false;
                         button.classList.remove('bg-blue-900');
                         button.classList.remove('cursor-not-allowed');

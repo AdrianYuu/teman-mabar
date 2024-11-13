@@ -39,6 +39,9 @@
                             Genre Name
                         </th>
                         <th scope="col" class="w-1/4 px-6 py-3 text-left">
+                            Price Type
+                        </th>
+                        <th scope="col" class="w-1/4 px-6 py-3 text-left">
                             Game Image
                         </th>
                         <th scope="col" class="w-1/4 px-6 py-3 text-left">
@@ -56,6 +59,10 @@
                             <th scope="row"
                                 class="whitespace-nowrap px-6 py-4 text-xl font-medium text-gray-900 dark:text-white">
                                 {{ $game->gameGenre->name }}
+                            </th>
+                            <th scope="row"
+                                class="whitespace-nowrap px-6 py-4 text-xl font-medium text-gray-900 dark:text-white">
+                                {{ $game->price_type }}
                             </th>
                             <th scope="row"
                                 class="whitespace-nowrap px-6 py-4 text-xl font-medium text-gray-900 dark:text-white">
