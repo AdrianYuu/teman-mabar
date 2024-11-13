@@ -13,17 +13,18 @@ class FirebaseStorageService
      * @param \Illuminate\Http\UploadedFile $file The uploaded file to be stored.
      * @return string The Firebase Storage file URL.
      */
-    public static function uploadImage($file)
+    public static function uploadImage($file, $id, $folder)
     {
-        $fileName = time() . '_' . $file->getClientOriginalName();
+        
+        $fileName = $id . '.' . $file->getClientOriginalExtension();
         
         $firebase = (new Factory)
-            ->withServiceAccount(storage_path('app/firebase/firebase_credentials.json'))
-            ->createStorage();
-
+        ->withServiceAccount(storage_path('app/firebase/firebase_credentials.json'))
+        ->createStorage();
+        
         $storage = $firebase->getBucket();
 
-        $firebaseFilePath = 'gameImages/' . $fileName;
+        $firebaseFilePath = "{$folder}/{$fileName}";
 
         $storage->upload(fopen($file->getRealPath(), 'r'), ['name' => $firebaseFilePath]);
 
@@ -33,5 +34,4 @@ class FirebaseStorageService
 
         return $publicUrl;
     }
-    
 }

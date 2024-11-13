@@ -6,12 +6,13 @@
     <div class="flex flex-col w-1/2">
         <div class="flex w-full gap-12">
             {{-- Left Side --}}
-            <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow p-4">
-                <img class="rounded-t-lg" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="" />
-                <form action="" method="POST" class="mt-6 w-full" enctype="multipart/form-data">
+            <div class="w-2/3 bg-blue-50 flex flex-col justify-between items-center justi border border-gray-200 rounded-lg shadow p-4">
+                <img class="rounded-lg h-full" src="{{ Auth::user()->profile_picture_url }}" alt="" />
+                <form action="{{ route('upload') }}" method="POST" class="mt-6 w-full" id="form-file" enctype="multipart/form-data">
+                    @method('PUT')
                     @csrf
                     <label for="file-upload" class="bg-gray-200 text-black py-2 px-4 rounded-xl cursor-pointer w-full h-116 block text-center text-lg transition duration-400 ease-in-out hover:bg-gray-300 hover:transform hover:-translate-y-1 hover:font-semibold">Upload Foto</label>
-                    <input id="file-upload" type="file" class="hidden" />
+                    <input id="file-upload" type="file" class="hidden" name="profile_picture" onchange="uploadPicture()"/>
                 </form>
             </div>
             {{-- Right Side --}}
@@ -29,7 +30,7 @@
                 <div id="default-tab-content">
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h1 class="text-lg font-bold">Biodata</h1>
-                        <form method="POST" action="{{ route('updateUser') }}" id="profile-form" class="flex flex-col space-y-4">
+                        <form action="{{ route('updateUser') }}" method="POST" id="profile-form" class="flex flex-col space-y-4">
                             @method('PUT')
                             @csrf
                             <div class="flex items-center">
@@ -124,4 +125,11 @@
             </form>
         </div>
     </div>
+
+    <script>
+        function uploadPicture(input){
+            var form = document.getElementById('form-file');
+            form.submit();
+        }
+    </script>
 @endsection

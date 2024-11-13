@@ -24,6 +24,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 // CUSTOMER
 Route::put('/profile/update', [UserController::class, 'update'])->name('updateUser');
+Route::put('/profile/picture-update', [UserController::class, 'upload'])->name('upload');
 
 // ADMIN
 Route::prefix('admin')->group(function () {

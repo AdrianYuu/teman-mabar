@@ -30,16 +30,18 @@ class GameController extends Controller
     {
         $validated = $request->validated();
 
+        $game = Game::create([
+            'genre_id' => $validated['genre_id'],
+            'name' => $validated['name']
+        ]);
+        
         if($request->hasFile('game_picture')){
             $file = $request->file('game_picture');
-            $fileUrl = FirebaseStorageService::uploadImage($file);
+            $fileUrl = FirebaseStorageService::uploadImage($file, $game->id, 'game');
+            $game->update([
+                'game_picture_url' => $fileUrl
+            ]);
         }
-
-        Game::create([
-            'genre_id' => $validated['genre_id'],
-            'name' => $validated['name'],
-            'game_picture_url' => $fileUrl
-        ]);
 
         return redirect(route('gamePage'))->with('success', 'Game created successfully!');
     }
@@ -65,7 +67,7 @@ class GameController extends Controller
 
         if($request->hasFile('game_picture')){
             $file = $request->file('game_picture');
-            $fileUrl = FirebaseStorageService::uploadImage($file);
+            $fileUrl = FirebaseStorageService::uploadImage($file, $game->id, 'game');
 
             $game->update([
                 'game_picture_url' => $fileUrl,
