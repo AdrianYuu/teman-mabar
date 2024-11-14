@@ -11,27 +11,29 @@ class UserPriceDetailController extends Controller
 {
     public function store(Request $request)
     {
-        // $user = Auth::user();
-        // $gameID = $request->game_id;
-
-        // $user->userPriceDetails->attach($gameID, [
-        //     'price' => $request->price
-        // ]);
-
-        // $user = User::findOrFail(Auth::user()->id);
-
-        // $user->userPriceDetails()->attach($request->game_id, [
-        //     'price' => $request->game_price
-        // ]);
-
-        $userPriceDetail = new UserPriceDetail([
+        UserPriceDetail::create([
             'user_id' => Auth::user()->id,
             'game_id' => $request->game_id,
             'price' => $request->price
         ]);
-    
-        // Save the record into the pivot table
-        $userPriceDetail->save();
+
+        return back();
+    }
+
+    public function update(Request $request)
+    {
+        UserPriceDetail::where('user_id', 'LIKE', Auth::user()->id)
+            ->where('game_id', 'LIKE', $request->update_id)
+            ->update([
+                'price' => $request->price
+            ]);
+
+        return back();
+    }
+
+    public function destroy(Request $request)
+    {
+        UserPriceDetail::where('user_id', Auth::user()->id)->where('game_id', $request->delete_id)->delete();
 
         return back();
     }

@@ -30,17 +30,6 @@ class UserController extends Controller
 
         return back();
     }
-    
-    public function updateGamePrice(Request $request)
-    {
-        UserPriceDetail::where('user_id', 'LIKE', Auth::user()->id)
-            ->where('game_id', 'LIKE', $request->id)
-            ->update([
-                'price' => $request->price
-            ]);
-
-        return back();
-    }
 
     public function upload(Request $request)
     {

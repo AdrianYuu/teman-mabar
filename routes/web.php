@@ -7,6 +7,7 @@ use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPriceDetailController;
+use App\Models\UserPriceDetail;
 use Illuminate\Support\Facades\Route;
 
 // Navigation
@@ -26,8 +27,9 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // CUSTOMER
 Route::put('/profile/update', [UserController::class, 'update'])->name('updateUser');
 Route::put('/profile/picture-update', [UserController::class, 'upload'])->name('upload');
-Route::put('/profile/price-update', [UserController::class, 'updateGamePrice'])->name('updateGamePrice');
 Route::post('/profile/user-price-detail/create', [UserPriceDetailController::class, 'store'])->name('storeUserPriceDetail');
+Route::put('/profile/user-price-detail/update', [UserPriceDetailController::class, 'update'])->name('updateGamePrice');
+Route::delete('/profile/user-price-detail/delete', [UserPriceDetailController::class, 'destroy'])->name('destroyUserPriceDetail');
 
 // ADMIN
 Route::prefix('admin')->group(function () {
