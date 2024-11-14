@@ -107,29 +107,6 @@
                     @foreach ($userGames as $userGame)
                         <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
                     @endforeach
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
-                    @endforeach
-                    
                 @endif
             </div>
             <div id="info-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -166,14 +143,14 @@
                     </form>
                 </div>
             </div>
-            <form action="{{ route('updateGamePrice') }}" method="POST"  class="flex flex-col gap-4">
+            <form action="{{ route('updateGamePrice') }}" method="POST" class="flex flex-col gap-4">
                 @method('PUT')
                 @csrf
                 <h1 id="title">Tarif Bermain -</h1>
                 <div class="flex flex-row items-center gap-4">
                     <p>Per Match</p>
-                    <input type="text" id="user-detail-price-input" value=0 class="w-1/12 h-8 px-2" name="price">
-                    <input type="text" id="id" value="" class="hidden" name="id">
+                    <input type="text" id="user-detail-price-input" value=0 class="w-2/12 h-8 px-2" name="price">
+                    <input type="text" id="update-game-price-id-input" value="" class="hidden" name="update_id">
                     <svg class="w-10 h-10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_430_4)">
                             <path d="M11.4164 10.7811C13.6525 8.00684 13.7518 4.37691 11.6383 2.67342C9.52484 0.969931 5.99882 1.83796 3.76275 4.61222C1.52668 7.38648 1.42732 11.0164 3.54081 12.7199C5.6543 14.4234 9.18032 13.5554 11.4164 10.7811Z" fill="#FCEA2B"/>
@@ -191,9 +168,15 @@
                         </defs>
                     </svg>
                 </div>
-                <div class="flex justify-start">
-                    <button type="submit" id="update-price-button" class="text-white bg-blue-900 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-not-allowed" disabled>Update Harga</button>
+                <div class="flex justify-start gap-x-4">
+                    <button type="button" id="delete-price-button" class="text-white bg-red-900 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-not-allowed" disabled>Hapus</button>
+                    <button type="submit" id="update-price-button" class="text-white bg-blue-900 dark:bg-blue-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center cursor-not-allowed" disabled>Update</button>
                 </div>
+            </form>
+            <form action="{{ route('destroyUserPriceDetail') }}" method="POST" id="delete-form">
+                @method('DELETE')
+                @csrf
+                <input type="text" id="delete-game-price-id-input" value="" class="hidden" name="delete_id">
             </form>
         </div>
     </div>
@@ -225,6 +208,10 @@
             document.getElementById('price-type-disabled-input').value = price;
         });
 
+        document.getElementById('delete-price-button').addEventListener('click', function() {
+            document.getElementById('delete-form').submit();
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             const images = document.querySelectorAll('.game-img');
 
@@ -233,23 +220,29 @@
                     const id = e.target.getAttribute('id');
                     const price = e.target.getAttribute('price');
                     const name = e.target.getAttribute('title');
-
-                    console.log(price);
                     
-                    const idInput = document.getElementById('id');
+                    const updateGamePriceInput = document.getElementById('update-game-price-id-input');
+                    const deleteGamePriceInput = document.getElementById('delete-game-price-id-input')
                     const priceInput = document.getElementById('user-detail-price-input');
                     const titleElement = document.getElementById('title');
-                    const button = document.getElementById('update-price-button');
-
+                    const deleteButton = document.getElementById('delete-price-button');
+                    const updateButton = document.getElementById('update-price-button');
+                    
                     if (priceInput && titleElement) {
-                        idInput.value = id;
+                        updateGamePriceInput.value = id;
+                        deleteGamePriceInput.value = id;
                         priceInput.value = price;
                         titleElement.textContent = 'Tarif Bermain ' + name;
-                        button.disabled = false;
-                        button.classList.remove('bg-blue-900');
-                        button.classList.remove('cursor-not-allowed');
-                        button.classList.add('bg-blue-600');
-                        button.classList.add('hover:bg-blue-700');
+                        deleteButton.disabled = false;
+                        deleteButton.classList.remove('bg-red-900');
+                        deleteButton.classList.remove('cursor-not-allowed');
+                        deleteButton.classList.add('bg-red-600');
+                        deleteButton.classList.add('hover:bg-red-700');
+                        updateButton.disabled = false;
+                        updateButton.classList.remove('bg-blue-900');
+                        updateButton.classList.remove('cursor-not-allowed');
+                        updateButton.classList.add('bg-blue-600');
+                        updateButton.classList.add('hover:bg-blue-700');
                     }
                 });
             });

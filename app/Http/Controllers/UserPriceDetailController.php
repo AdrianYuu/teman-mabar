@@ -19,4 +19,22 @@ class UserPriceDetailController extends Controller
 
         return back();
     }
+
+    public function update(Request $request)
+    {
+        UserPriceDetail::where('user_id', 'LIKE', Auth::user()->id)
+            ->where('game_id', 'LIKE', $request->update_id)
+            ->update([
+                'price' => $request->price
+            ]);
+
+        return back();
+    }
+
+    public function destroy(Request $request)
+    {
+        UserPriceDetail::where('user_id', Auth::user()->id)->where('game_id', $request->delete_id)->delete();
+
+        return back();
+    }
 }
