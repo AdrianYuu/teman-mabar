@@ -43,11 +43,11 @@
                             </div>
                             <div class="flex items-center">
                                 <label class="w-1/3 text-md">Jenis Kelamin</label>
-                                <div class="flex items-center ps-4 border w-1/3 max-h-8 border-gray-200 rounded dark:border-gray-700">
+                                <div class="flex items-center w-1/3 max-h-8 border-gray-200 rounded dark:border-gray-700">
                                     <input id="bordered-radio-1" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="Laki-laki" name="gender" {{ Auth::user()->gender === "Laki-laki" ? 'checked' : ''}}>
                                     <label for="bordered-radio-1" class="w-full py-4 ms-2 text-sm text-gray-900 dark:text-gray-300">Laki-laki</label>
                                 </div>
-                                <div class="flex items-center ps-4 border w-1/3 max-h-8 border-gray-200 rounded dark:border-gray-700">
+                                <div class="flex items-center w-1/3 max-h-8 border-gray-200 rounded dark:border-gray-700">
                                     <input id="bordered-radio-2" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" value="Perempuan" name="gender" {{ Auth::user()->gender === "Perempuan" ? 'checked' : ''}}>
                                     <label for="bordered-radio-2" class="w-full py-4 ms-2 text-sm text-gray-900 dark:text-gray-300">Perempuan</label>
                                 </div>
@@ -92,9 +92,9 @@
                     </svg>
                 </button>
             </div>
-            <div class="flex flex-row items-center overflow-x-auto overflow-y-hidden whitespace-nowrap gap-x-4 py-4 h-1/2">
+            <div class="flex flex-row items-center overflow-x-auto overflow-y-hidden whitespace-nowrap gap-x-4 py-2">
                 @if ($userGames->isEmpty())
-                    <div id="toast-warning" class="flex justify-center items-center w-1/2 h-1/2 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 m-auto" role="alert">
+                    <div id="toast-warning" class="flex justify-center items-center w-1/2 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 m-auto" role="alert">
                         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM10 15a1 1 0 1 1 0-2 1 1 0 0 1 0 2Zm1-4a1 1 0 0 1-2 0V6a1 1 0 0 1 2 0v5Z"/>
@@ -105,8 +105,31 @@
                     </div>
                 @else
                     @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
                     @endforeach
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                    @foreach ($userGames as $userGame)
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                    @endforeach
+                    
                 @endif
             </div>
             <div id="info-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
@@ -149,7 +172,7 @@
                 <h1 id="title">Tarif Bermain -</h1>
                 <div class="flex flex-row items-center gap-4">
                     <p>Per Match</p>
-                    <input type="text" id="price" value=0 class="w-1/12 h-8 px-2" name="price">
+                    <input type="text" id="user-detail-price-input" value=0 class="w-1/12 h-8 px-2" name="price">
                     <input type="text" id="id" value="" class="hidden" name="id">
                     <svg class="w-10 h-10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_430_4)">
@@ -210,9 +233,11 @@
                     const id = e.target.getAttribute('id');
                     const price = e.target.getAttribute('price');
                     const name = e.target.getAttribute('title');
+
+                    console.log(price);
                     
                     const idInput = document.getElementById('id');
-                    const priceInput = document.getElementById('price');
+                    const priceInput = document.getElementById('user-detail-price-input');
                     const titleElement = document.getElementById('title');
                     const button = document.getElementById('update-price-button');
 
