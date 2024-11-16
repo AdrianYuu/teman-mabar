@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('password');
             $table->date('date_of_birth')->nullable();
             $table->string('gender')->nullable();
-            $table->string('biography')->nullable();
+            $table->longText('biography')->nullable();
             $table->integer('coin')->default(0);
             $table->string('profile_picture_url')->nullable();
             $table->boolean('is_verified')->default(false);
