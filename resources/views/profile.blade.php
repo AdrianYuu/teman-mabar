@@ -7,7 +7,7 @@
         <div class="flex w-full gap-12">
             {{-- Left Side --}}
             <div class="w-2/3 bg-white flex flex-col justify-between items-center justi border border-gray-200 rounded-lg shadow p-4">
-                <img class="rounded-lg h-full" src="{{ Auth::user()->profile_picture_url }}" alt="" />
+                <img class="rounded-lg object-cover h-full" src="{{ Auth::user()->profile_picture_url ? Auth::user()->profile_picture_url : asset('assets/images/Profile-banner.jpg') }}" alt="" />
                 <form action="{{ route('upload') }}" method="POST" class="mt-6 w-full" id="form-file" enctype="multipart/form-data">
                     @method('PUT')
                     @csrf
@@ -16,7 +16,7 @@
                 </form>
             </div>
             {{-- Right Side --}}
-            <div class="bg-white border border-gray-200 rounded-lg shadow p-4 w-full">
+            <div class="bg-white border border-gray-200 rounded-lg shadow p-4 w-full h-[35rem]">
                 <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab" data-tabs-toggle="#default-tab-content" role="tablist">
                         <li class="me-2">
@@ -35,11 +35,11 @@
                             @csrf
                             <div class="flex items-center">
                                 <label class="w-1/3 text-md">Email</label>
-                                <input type="text" id="disabled-input" aria-label="disabled input" class="bg-gray-200 border w-2/3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value={{ Auth::user()->email }} disabled>
+                                <input type="text" id="disabled-input" aria-label="disabled input" class="bg-gray-200 border w-2/3 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ Auth::user()->email }}" disabled>
                             </div>
                             <div class="flex items-center">
                                 <label class="w-1/3 text-md">Nama / Nickname</label>
-                                <input type="text" class="w-2/3 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 bg-gray-50" placeholder="Masukkan nama / nickname" value={{ Auth::user()->name }} name="name"/>
+                                <input type="text" class="w-2/3 border border-gray-300 rounded-lg p-2.5 text-sm text-gray-900 bg-gray-50" placeholder="Masukkan nama / nickname" value="{{ $authUser->name }}" name="name"/>
                             </div>
                             <div class="flex items-center">
                                 <label class="w-1/3 text-md">Jenis Kelamin</label>
@@ -73,7 +73,7 @@
                         </form>
                     </div>
                     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="album" role="tabpanel" aria-labelledby="dashboard-tab">
-                        <div class="grid grid-cols-3 gap-4">
+                        <div class="grid grid-cols-3 gap-2">
                             <img class="h-full w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
                             <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
                             <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800" src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
@@ -105,7 +105,7 @@
                     </div>
                 @else
                     @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" title="{{ $userGame->game->name }}">
+                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" price_type="{{ $userGame->game->price_type }}" title="{{ $userGame->game->name }}" >
                     @endforeach
                 @endif
             </div>
@@ -119,12 +119,15 @@
                         <div>
                             <label for="game_id" class="mb-2 block text-sm text-gray-900 dark:text-white">Permainan</label>
                             <select id="game_id" name="game_id"
-                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
                                 <option value="" selected>Please select one...</option>
                                 @foreach ($games as $game)
                                     <option value={{ $game->id }} price_type={{ $game->price_type }}>{{ $game->name }}</option>
                                 @endforeach
                             </select>
+                            @error('game_id', 'StoreUserPriceDetail')
+                                <p class="text-red-500 mt-2">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="price-type-disabled-input" class="block mb-2 text-sm text-gray-900 dark:text-white">Tipe</label>
@@ -133,6 +136,9 @@
                         <div>
                             <label for="price" class="block mb-2 text-sm text-gray-900 dark:text-white">Harga</label>
                             <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="10" name="price"/>
+                            @error('price', 'StoreUserPriceDetail')
+                                <p class="text-red-500 mt-2">{{ $message }}</p>
+                            @enderror
                         </div> 
                         <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">
                             <div class="justify-center items-center sm:space-x-4 sm:flex sm:space-y-0">
@@ -148,8 +154,8 @@
                 @csrf
                 <h1 id="title">Tarif Bermain -</h1>
                 <div class="flex flex-row items-center gap-4">
-                    <p>Per Match</p>
-                    <input type="text" id="user-detail-price-input" value=0 class="w-2/12 h-8 px-2" name="price">
+                    <p id="pricing_type">Per</p>
+                    <input type="text" id="user-detail-price-input" value=0 class="w-2/12 h-8 px-2 bg-gray-300" name="price" disabled>
                     <input type="text" id="update-game-price-id-input" value="" class="hidden" name="update_id">
                     <svg class="w-10 h-10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_430_4)">
@@ -180,6 +186,14 @@
             </form>
         </div>
     </div>
+
+    @if ($errors->StoreUserPriceDetail->any())
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                privacyModal.show()
+            });
+        </script>
+    @endif
 
     <script>
         function uploadPicture(input)
@@ -220,10 +234,12 @@
                     const id = e.target.getAttribute('id');
                     const price = e.target.getAttribute('price');
                     const name = e.target.getAttribute('title');
+                    const priceType = e.target.getAttribute('price_type');
                     
                     const updateGamePriceInput = document.getElementById('update-game-price-id-input');
                     const deleteGamePriceInput = document.getElementById('delete-game-price-id-input')
                     const priceInput = document.getElementById('user-detail-price-input');
+                    const priceTypeElement = document.getElementById('pricing_type')
                     const titleElement = document.getElementById('title');
                     const deleteButton = document.getElementById('delete-price-button');
                     const updateButton = document.getElementById('update-price-button');
@@ -232,6 +248,9 @@
                         updateGamePriceInput.value = id;
                         deleteGamePriceInput.value = id;
                         priceInput.value = price;
+                        priceInput.classList.remove('bg-gray-300');
+                        priceInput.disabled = false;
+                        priceTypeElement.textContent = 'Per ' + priceType;
                         titleElement.textContent = 'Tarif Bermain ' + name;
                         deleteButton.disabled = false;
                         deleteButton.classList.remove('bg-red-900');
