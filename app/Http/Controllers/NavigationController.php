@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Game;
 use App\Models\GameGenre;
+use App\Models\User;
 use App\Models\UserPriceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,8 +38,9 @@ class NavigationController extends Controller
         $userGames = UserPriceDetail::where('user_id', Auth::user()->id)->get();
         $gameIds = $userGames->pluck('game_id');
         $games = Game::whereNotIn('id', $gameIds)->get();
+        $authUser = User::findOrFail(Auth::user()->id);
 
-        return view('profile', compact('userGames', 'games'));
+        return view('profile', compact('userGames', 'games', 'authUser'));
     }
 
     public function adminIndexPage()

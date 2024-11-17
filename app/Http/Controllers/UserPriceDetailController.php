@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Http\Requests\StoreUserPriceDetailRequest;
 use App\Models\UserPriceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserPriceDetailController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreUserPriceDetailRequest $request)
     {
+        $validated = $request->validated();
+
         UserPriceDetail::create([
             'user_id' => Auth::user()->id,
-            'game_id' => $request->game_id,
-            'price' => $request->price
+            'game_id' => $validated['game_id'],
+            'price' => $validated['price']
         ]);
 
         return back();
@@ -35,6 +37,6 @@ class UserPriceDetailController extends Controller
     {
         UserPriceDetail::where('user_id', Auth::user()->id)->where('game_id', $request->delete_id)->delete();
 
-        return back();
+        return redirect()->back();
     }
 }

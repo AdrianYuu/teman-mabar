@@ -25,7 +25,7 @@ class UserController extends Controller
         if ($date) {
             $input['date_of_birth'] = $date->format('Y-m-d');
         }
-
+        
         User::findOrFail(Auth::user()->id)->update($input);
 
         return back();

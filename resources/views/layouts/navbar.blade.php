@@ -29,7 +29,7 @@
 				</div>
 				<button type="button" class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
 				<span class="sr-only">Open user menu</span>
-				<img class="w-8 h-8 rounded-full" src={{ asset('assets/images/Profile.png') }} alt="user photo">
+				<img class="w-8 h-8 object-fill rounded-full border-2 border-gray-600 " src="{{ Auth::user()->profile_picture_url ? Auth::user()->profile_picture_url : asset('assets/images/Profile-icon.jpg') }}" alt="user photo">
 				</button>
 				<div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
 					<div class="px-4 py-3">
