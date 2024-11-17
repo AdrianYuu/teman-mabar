@@ -28,9 +28,18 @@ class NavigationController extends Controller
         return view('register');
     }
     
-    public function gameListPage()
+    public function gameListPage(Request $request)
     {
-        return view('game-list');
+        $selectedGenre = $request->query('genre', null);
+        $selectedGenreId = GameGenre::where('name', 'LIKE', $selectedGenre)->pluck('id');
+
+        $genres = GameGenre::all();
+        if(!$selectedGenre)
+            $games = Game::all();
+        else
+            $games = Game::where('genre_id', 'LIKE', $selectedGenreId)->get();
+
+        return view('game', compact('genres', 'games', 'selectedGenre'));
     }
 
     public function profilePage()
