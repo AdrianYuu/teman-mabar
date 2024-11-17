@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameGenreController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPriceDetailController;
@@ -18,6 +19,7 @@ Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameLi
 Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
 Route::get('/competition', [NavigationController::class, 'competitionPage'])->name('competitionPage');
 Route::get('/competition/detail', [NavigationController::class, 'competitionDetailPage'])->name('competitionDetailPage');
+Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->name('gameDetailPage');
 
 // Auth
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -30,6 +32,9 @@ Route::put('/profile/picture-update', [UserController::class, 'upload'])->name('
 Route::post('/profile/user-price-detail/create', [UserPriceDetailController::class, 'store'])->name('storeUserPriceDetail');
 Route::put('/profile/user-price-detail/update', [UserPriceDetailController::class, 'update'])->name('updateGamePrice');
 Route::delete('/profile/user-price-detail/delete', [UserPriceDetailController::class, 'destroy'])->name('destroyUserPriceDetail');
+
+// ORDER
+Route::post('/order/create/{game_id}/{gamer_user_id}', [OrderController::class, 'create'])->name('storeOrder');
 
 // ADMIN
 Route::prefix('admin')->group(function () {
