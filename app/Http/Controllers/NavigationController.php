@@ -46,7 +46,7 @@ class NavigationController extends Controller
         return view('admin/index');
     }
 
-    public function competitionPage(Request $request)
+    public function competitionPage()
     {
         return view('competition/index');
     }
@@ -54,5 +54,11 @@ class NavigationController extends Controller
     public function competitionDetailPage()
     {
         return view('competition/detail');
+    }
+
+    public function gameDetailPage(Request $request)
+    {
+        $game = Game::where('name', $request->name)->get();
+        return view('game/index', compact('game'));
     }
 }

@@ -18,6 +18,7 @@ Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameLi
 Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
 Route::get('/competition', [NavigationController::class, 'competitionPage'])->name('competitionPage');
 Route::get('/competition/detail', [NavigationController::class, 'competitionDetailPage'])->name('competitionDetailPage');
+Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->name('gameDetailPage');
 
 // Auth
 Route::post('/register', [AuthController::class, 'register'])->name('register');
