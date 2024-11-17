@@ -101,8 +101,7 @@
                         @foreach ($genre->games as $game)
                             <a href="{{ route('gameDetailPage', ['name' => $game->name]) }}"
                                 class="flex h-64 w-48 flex-shrink-0 flex-col items-center rounded-2xl border border-gray-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
-                                <img class="h-full w-full rounded-2xl"
-                                    src="{{ asset('assets/images/profile-picture.jpg') }}" alt="">
+                                <img class="h-full w-full rounded-2xl" src={{ $game->game_picture_url }} alt="">
                             </a>
                         @endforeach
                     </div>

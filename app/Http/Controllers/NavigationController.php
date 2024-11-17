@@ -60,7 +60,7 @@ class NavigationController extends Controller
 
     public function gameDetailPage(Request $request)
     {
-        $game = Game::where('name', $request->name)->get();
-        return view('game/index', compact('game'));
+        $game = Game::where('name', $request->name)->first();
+        return view('game-detail/index', compact('game'));
     }
 }
