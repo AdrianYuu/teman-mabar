@@ -68,10 +68,13 @@
 					<a href="{{ route('indexPage') }}" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/') ? 'text-blue-700' : ''}}" aria-current="page">Beranda</a>
 				</li>
 				<li>
-					<a href="#" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/?') ? 'text-blue-700' : ''}}" aria-current="page">Cari Teman Game</a>
+					<a href="{{ route('gameListPage') }}" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/game') ? 'text-blue-700' : ''}}" aria-current="page">Game</a>
 				</li>
 				<li>
-					<a href="#" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/?') ? 'text-blue-700' : ''}}" aria-current="page">Cari Kompetisi</a>
+					<a href="#" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/?') ? 'text-blue-700' : ''}}" aria-current="page">Teman Game</a>
+				</li>
+				<li>
+					<a href="#" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/?') ? 'text-blue-700' : ''}}" aria-current="page">Kompetisi</a>
 				</li>
 				<li>
 					<a href="#" class="block py-2 px-3 text-black rounded md:bg-transparent hover:text-blue-700 md:p-0 md:dark:text-blue-500 {{ Request::is('/?') ? 'text-blue-700' : ''}}" aria-current="page">Forum</a>
