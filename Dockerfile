@@ -39,6 +39,8 @@ RUN npm install
 # Build frontend assets (compile Tailwind CSS, Flowbite, etc.)
 RUN npm run build
 
+RUN php artisan key:generate
+
 # Set proper permissions for Laravel's storage and other directories
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
