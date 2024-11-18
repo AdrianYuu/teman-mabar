@@ -15,8 +15,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::all();
-        return view('order', compact('orders'));
+        $ordersAsCustomer = Order::where('customer_user_id', Auth::user()->id)->get();
+        $ordersAsGamer = Order::where('gamer_user_id', Auth::user()->id)->get();
+        return view('order', compact('ordersAsCustomer', 'ordersAsGamer'));
     }
 
     public function create(StoreOrderRequest $request, $gameId, $gamerUserId)
@@ -62,6 +63,22 @@ class OrderController extends Controller
         $order->update([
             'status' => 'Finished'
         ]);
+
+        $userPriceDetail = UserPriceDetail::where('user_id', $order->gamer_user_id)
+                                            ->where('game_id', $order->game_id)->first();
+
+        $user = User::findOrFail($order->gamer_user_id);
+        $game = Game::findOrFail($order->game_id);
+
+        if($game->price_type === 'Match'){
+            $user->update([
+                'coin' => $user->coin + ($userPriceDetail->price * $order->total_match)
+            ]);
+        } else {
+             $user->update([
+                'coin' => $user->coin + ($userPriceDetail->price)
+            ]);
+        }
 
         return back();
     }
