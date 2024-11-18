@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('subscriber_count')->default(0);
             $table->string('otp_code')->nullable();
             $table->timestamp('otp_valid_time')->nullable();
+            $table->boolean('is_admin')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });
