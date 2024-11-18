@@ -6,6 +6,7 @@ use App\Http\Controllers\GameGenreController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\UserActivityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPriceDetailController;
 use App\Models\UserPriceDetail;
@@ -34,7 +35,14 @@ Route::put('/profile/user-price-detail/update', [UserPriceDetailController::clas
 Route::delete('/profile/user-price-detail/delete', [UserPriceDetailController::class, 'destroy'])->name('destroyUserPriceDetail');
 
 // ORDER
-Route::post('/order/create/{game_id}/{gamer_user_id}', [OrderController::class, 'create'])->name('storeOrder');
+Route::get('/order', [OrderController::class, 'index'])->name('orderPage');
+Route::post('/order/create/{gameId}/{gamerUserId}', [OrderController::class, 'create'])->name('storeOrder');
+Route::put('/order/edit/{id}', [OrderController::class, 'update'])->name('updateOrder');
+
+// MANAGE COIN
+Route::get('/manage-coin', [UserActivityController::class, 'manageCoinPage'])->name('manageCoinPage');
+Route::post('/manage-coin/top-up/store', [UserActivityController::class, 'topUpStore'])->name('storeTopUp');
+
 
 // ADMIN
 Route::prefix('admin')->group(function () {

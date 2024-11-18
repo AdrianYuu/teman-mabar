@@ -13,11 +13,19 @@ use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
-    public function create(Request $request, $game_id, $gamer_user_id)
+    public function index()
     {
+        $orders = Order::all();
+        return view('order', compact('orders'));
+    }
+
+    public function create(StoreOrderRequest $request, $gameId, $gamerUserId)
+    {
+        $request->validated();
+
         $currentUser = Auth::user();
-        $game = Game::findOrFail($game_id);
-        $userPriceDetail = UserPriceDetail::where('user_id', $gamer_user_id)->where('game_id', $game_id)->first();
+        $game = Game::findOrFail($gameId);
+        $userPriceDetail = UserPriceDetail::where('user_id', $gamerUserId)->where('game_id', $gameId)->first();
 
         if($game->price_type == "Match"){
             $totalPrice = $userPriceDetail->price * $request->total_match;
@@ -32,18 +40,29 @@ class OrderController extends Controller
 
         $user = User::findOrFail($currentUser->id);
         $user->update([
-            'balance' => $user->balance - $totalPrice
+            'coin' => $user->coin - $totalPrice
         ]);
 
         Order::create([
-            'game_id' => $game_id,
-            'gamer_user_id' => $gamer_user_id,
+            'game_id' => $gameId,
+            'gamer_user_id' => $gamerUserId,
             'customer_user_id' => $currentUser->id,
             'start_time' => $request->start_time,
             'end_time' => $request->end_time,
-            'total_match' => $request->total_match
+            'total_match' => $request->total_match,
+            'status' => 'Not finished'
         ]);
 
-        return redirect()->route('indexPage');
+        return back();
+    }
+
+    public function update($id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update([
+            'status' => 'Finished'
+        ]);
+
+        return back();
     }
 }

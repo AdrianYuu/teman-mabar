@@ -18,30 +18,30 @@ class GameSeeder extends Seeder
             [
                 'id' => Str::uuid(),
                 'genre_id' => $genres[array_rand($genres)],
-                'name' => 'Game Title 1',
+                'name' => 'Counter Strike 2',
                 'price_type' => 'Match',
-                'game_picture_url' => 'https://example.com/game1.jpg'
+                'game_picture_url' => 'https://firebasestorage.googleapis.com/v0/b/temanmabar-7a90d.appspot.com/o/game%2Fcs2.webp?alt=media&token=8c6bc034-1e0b-4ab7-9011-d9aab6c97375'
             ],
             [
                 'id' => Str::uuid(),
                 'genre_id' => $genres[array_rand($genres)],
-                'name' => 'Game Title 2',
+                'name' => 'Honor of Kings',
                 'price_type' => 'Match',
-                'game_picture_url' => 'https://example.com/game2.jpg'
+                'game_picture_url' => 'https://firebasestorage.googleapis.com/v0/b/temanmabar-7a90d.appspot.com/o/game%2Fhok.jpg?alt=media&token=0c031b4c-07ea-4401-bd3d-632c5bd14287'
             ],
             [
                 'id' => Str::uuid(),
                 'genre_id' => $genres[array_rand($genres)],
-                'name' => 'Game Title 3',
+                'name' => 'Mobile Legends',
                 'price_type' => 'Match',
-                'game_picture_url' => 'https://example.com/game3.jpg'
+                'game_picture_url' => 'https://firebasestorage.googleapis.com/v0/b/temanmabar-7a90d.appspot.com/o/game%2Fmole.jpeg?alt=media&token=c768eecb-e16a-4ee8-af36-8fd5995a8d56'
             ],
             [
                 'id' => Str::uuid(),
                 'genre_id' => $genres[array_rand($genres)],
-                'name' => 'Game Title 4',
+                'name' => 'VALORANT',
                 'price_type' => 'Match',
-                'game_picture_url' => 'https://example.com/game4.jpg'
+                'game_picture_url' => 'https://firebasestorage.googleapis.com/v0/b/temanmabar-7a90d.appspot.com/o/game%2Fvalorant.jpg?alt=media&token=b0552213-048c-4bf7-9cf6-ac0f50719ce7g'
             ],
         ];
 
