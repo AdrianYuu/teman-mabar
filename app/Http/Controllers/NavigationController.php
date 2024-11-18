@@ -13,7 +13,7 @@ class NavigationController extends Controller
 {
     public function indexPage() 
     {
-        $genres = GameGenre::all()->sortBy('name')->take(8);
+        $genres = GameGenre::all()->sortBy('name')->take(12);
         $games = Game::all();
         return view('index', compact('genres', 'games'));
     }
@@ -72,4 +72,5 @@ class NavigationController extends Controller
         $game = Game::where('name', $request->name)->first();
         return view('game-detail/index', compact('game'));
     }
+
 }

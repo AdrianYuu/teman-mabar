@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrderRequest extends FormRequest
+class StoreTopUpRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_time' => ['nullable', 'date', 'before:end_time'],
-            'end_time' => ['nullable', 'date', 'after:start_time'],
-            'total_match' => ['nullable', 'numeric', 'min:1']
+            'coin_amount' => ['required', 'numeric', 'min:1'],
+            'payment_id' => ['required']
         ];
     }
 }

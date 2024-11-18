@@ -7,45 +7,15 @@
         {{-- Tournament Poster Carousel --}}
         <div id="default-carousel" class="relative w-3/4" data-carousel="slide">
             <div class="relative overflow-hidden rounded-lg md:h-96">
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <a href="">
-                        <img src={{ asset('assets/images/profile-picture.jpg') }}
-                            class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-                            alt="...">
-                    </a>
-                </div>
-                <!-- Item 2 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <a href="">
-                        <img src={{ asset('assets/images/profile-picture.jpg') }}
-                            class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-                            alt="...">
-                    </a>
-                </div>
-                <!-- Item 3 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <a href="">
-                        <img src={{ asset('assets/images/profile-picture.jpg') }}
-                            class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-                            alt="...">
-                    </a>
-                </div>
-                <!-- Item 4 -->
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <a href="">
-                        <img src={{ asset('assets/images/profile-picture.jpg') }}
-                            class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-                            alt="...">
-                    </a>
-                </div>
-                {{-- Item 5 --}}
-                <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                    <a href="">
-                        <img src={{ asset('assets/images/profile-picture.jpg') }}
-                            class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
-                            alt="...">
-                    </a>
-                </div>
+                @foreach ($games as $game)
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <a href="">
+                            <img src={{ $game->game_picture_url }}
+                                class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
+                                alt="...">
+                        </a>
+                    </div>
+                @endforeach
             </div>
             <button type="button"
                 class="group absolute start-0 top-0 z-30 flex h-full cursor-pointer items-center justify-center px-4 focus:outline-none"
@@ -100,8 +70,9 @@
                         aria-labelledby="{{ strtolower($genre->name) }}-tab">
                         @foreach ($genre->games as $game)
                             <a href="{{ route('gameDetailPage', ['name' => $game->name]) }}"
-                                class="flex h-64 w-48 flex-shrink-0 flex-col items-center rounded-2xl border border-gray-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
-                                <img class="h-full w-full rounded-2xl" src={{ $game->game_picture_url }} alt="">
+                                class="flex h-72 w-64 flex-shrink-0 flex-col items-center rounded-2xl border border-gray-200 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 md:max-w-xl md:flex-row">
+                                <img class="h-full w-full rounded-2xl object-cover" src={{ $game->game_picture_url }}
+                                    alt="">
                             </a>
                         @endforeach
                     </div>

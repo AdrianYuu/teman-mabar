@@ -16,9 +16,7 @@ class GameGenreSeeder extends Seeder
         $genres = [
             ['id' => Str::uuid(), 'name' => 'Action'],
             ['id' => Str::uuid(), 'name' => 'Adventure'],
-            ['id' => Str::uuid(), 'name' => 'Role-playing'],
             ['id' => Str::uuid(), 'name' => 'Simulation'],
-            ['id' => Str::uuid(), 'name' => 'Strategy'],
             ['id' => Str::uuid(), 'name' => 'Sports'],
             ['id' => Str::uuid(), 'name' => 'Puzzle'],
             ['id' => Str::uuid(), 'name' => 'Horror'],

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->timestamp('start_time')->nullable();
             $table->timestamp('end_time')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('game_id')->references('id')->on('games')->onUpdate('cascade');
             $table->foreign('gamer_user_id')->references('id')->on('users')->onUpdate('cascade');
