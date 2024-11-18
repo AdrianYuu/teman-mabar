@@ -45,7 +45,7 @@
             </button>
         </div>
         {{-- Genre Game --}}
-        <div class="mt-8 w-full">
+        <div class="mt-8 w-5/6">
             <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
                 <ul class="-mb-px flex flex-wrap text-center text-sm font-medium" id="default-tab"
                     data-tabs-toggle="#default-tab-content" role="tablist">
@@ -58,8 +58,7 @@
                         </li>
                     @endforeach
                     <li>
-                        {{-- <a href="{{ route('') }}"
-                            class="inline-block rounded-t-lg p-4 text-blue-500 hover:border-b-2">Lainnya...</a> --}}
+                        <a href="{{ route('gameListPage') }}" class="inline-block rounded-t-lg p-4 text-blue-500 hover:border-b-2">Lainnya...</a>
                     </li>
                 </ul>
             </div>

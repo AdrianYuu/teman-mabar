@@ -103,30 +103,25 @@
             <ul
                 class="mt-4 flex flex-col rounded-lg border border-gray-100 bg-gray-50 p-4 text-lg font-medium rtl:space-x-reverse dark:border-gray-700 dark:bg-gray-800 md:mt-0 md:flex-row md:space-x-8 md:border-0 md:bg-white md:p-0 md:dark:bg-gray-900">
                 <li>
-                    <a href="{{ route('indexPage') }}"
-                        class="{{ Request::is('/') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Beranda</a>
+                    <a href="{{ route('indexPage') }}" class="{{ Request::is('/') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500" aria-current="page">Beranda</a>
                 </li>
                 <li>
-                    <a href="{{ route('gameListPage') }}"
-                        class="{{ Request::is('/game') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Game</a>
+                    <a href="{{ route('gameListPage') }}" class="{{ Request::is('game') || Request::is('game-detail') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500" aria-current="page">Game</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Teman Game</a>
+                    <a href="#" class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500" aria-current="page">Teman Game</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Kompetisi</a>
+                    <a href="#" class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500" aria-current="page">Kompetisi</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Forum</a>
+                    <a href="#" class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500" aria-current="page">Forum</a>
                 </li>
+                @if (Auth::check() && Auth::user()->is_admin)
+                    <li>
+                        <a href="{{ route('adminIndexPage') }}" class="block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500" aria-current="page">Halaman Admin</a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

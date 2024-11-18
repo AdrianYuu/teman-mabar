@@ -9,13 +9,11 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserActivityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPriceDetailController;
-use App\Models\UserPriceDetail;
 use Illuminate\Support\Facades\Route;
 
 // Navigation
 Route::get('/', [NavigationController::class, 'indexPage'])->name('indexPage');
-Route::get('/login', [NavigationController::class, 'loginPage'])->name('loginPage');
-Route::get('/register', [NavigationController::class, 'registerPage'])->name('registerPage');
+
 Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameListPage');
 Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
 Route::get('/competition', [NavigationController::class, 'competitionPage'])->name('competitionPage');
@@ -23,16 +21,22 @@ Route::get('/competition/detail', [NavigationController::class, 'competitionDeta
 Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->name('gameDetailPage');
 
 // Auth
-Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::middleware(['guest'])->group(function() {
+    Route::get('/register', [NavigationController::class, 'registerPage'])->name('registerPage');
+    Route::get('/login', [NavigationController::class, 'loginPage'])->name('loginPage');
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+});
 
 // CUSTOMER
-Route::put('/profile/update', [UserController::class, 'update'])->name('updateUser');
-Route::put('/profile/picture-update', [UserController::class, 'upload'])->name('upload');
-Route::post('/profile/user-price-detail/create', [UserPriceDetailController::class, 'store'])->name('storeUserPriceDetail');
-Route::put('/profile/user-price-detail/update', [UserPriceDetailController::class, 'update'])->name('updateGamePrice');
-Route::delete('/profile/user-price-detail/delete', [UserPriceDetailController::class, 'destroy'])->name('destroyUserPriceDetail');
+Route::middleware(['auth'])->group(function() {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::put('/profile/update', [UserController::class, 'update'])->name('updateUser');
+    Route::put('/profile/picture-update', [UserController::class, 'upload'])->name('upload');
+    Route::post('/profile/user-price-detail/create', [UserPriceDetailController::class, 'store'])->name('storeUserPriceDetail');
+    Route::put('/profile/user-price-detail/update', [UserPriceDetailController::class, 'update'])->name('updateGamePrice');
+    Route::delete('/profile/user-price-detail/delete', [UserPriceDetailController::class, 'destroy'])->name('destroyUserPriceDetail');
+});
 
 // ORDER
 Route::get('/order', [OrderController::class, 'index'])->name('orderPage');
@@ -43,9 +47,8 @@ Route::put('/order/edit/{id}', [OrderController::class, 'update'])->name('update
 Route::get('/manage-coin', [UserActivityController::class, 'manageCoinPage'])->name('manageCoinPage');
 Route::post('/manage-coin/top-up/store', [UserActivityController::class, 'topUpStore'])->name('storeTopUp');
 
-
 // ADMIN
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->middleware(['admin'])->group(function () {
     // INDEX
     Route::get('/', [NavigationController::class, 'adminIndexPage'])->name('adminIndexPage');
 

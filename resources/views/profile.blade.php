@@ -93,7 +93,9 @@
                 </button>
             </div>
             <div class="flex flex-row items-center overflow-x-auto overflow-y-hidden whitespace-nowrap gap-x-4 py-2">
-                @if ($userGames->isEmpty())
+                @forelse ($userGames as $userGame)
+                    <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" price_type="{{ $userGame->game->price_type }}" title="{{ $userGame->game->name }}">
+                @empty
                     <div id="toast-warning" class="flex justify-center items-center w-1/2 max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 m-auto" role="alert">
                         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
                             <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -103,11 +105,7 @@
                         </div>
                         <div class="ms-3 text-sm font-normal">Daftar permainan belum ditambahkan.</div>
                     </div>
-                @else
-                    @foreach ($userGames as $userGame)
-                        <img class="game-img w-1/6 h-4/5 rounded-lg shadow-md cursor-pointer" src="{{ $userGame->game->game_picture_url }}" alt="{{ $userGame->game->name }}" id="{{ $userGame->game->id }}" price="{{ $userGame->price }}" price_type="{{ $userGame->game->price_type }}" title="{{ $userGame->game->name }}" >
-                    @endforeach
-                @endif
+                @endforelse
             </div>
             <div id="info-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4 w-full max-w-lg h-full md:h-auto">
@@ -155,7 +153,7 @@
                 <h1 id="title">Tarif Bermain -</h1>
                 <div class="flex flex-row items-center gap-4">
                     <p id="pricing_type">Per</p>
-                    <input type="text" id="user-detail-price-input" value=0 class="w-2/12 h-8 px-2 bg-gray-300" name="price" disabled>
+                    <input type="text" id="user-detail-price-input" value=0 class="w-2/12 h-8 px-2 bg-gray-300 rounded-md" name="price" disabled>
                     <input type="text" id="update-game-price-id-input" value="" class="hidden" name="update_id">
                     <svg class="w-10 h-10" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_430_4)">
