@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [NavigationController::class, 'indexPage'])->name('indexPage');
 
 Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameListPage');
+Route::get('/player', [NavigationController::class, 'playerListPage'])->name('playerListPage');
 Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
 Route::get('/competition', [NavigationController::class, 'competitionPage'])->name('competitionPage');
 Route::get('/competition/detail', [NavigationController::class, 'competitionDetailPage'])->name('competitionDetailPage');
 Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->name('gameDetailPage');
+Route::get('/player-detail/{id}', [NavigationController::class, 'playerDetailPage'])->name('playerDetailPage');
 
 // Auth
 Route::middleware(['guest'])->group(function() {

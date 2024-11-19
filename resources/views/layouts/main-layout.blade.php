@@ -14,7 +14,7 @@
 <body>
     <div class="flex min-h-screen w-full flex-col justify-between bg-gray-50">
         @include('layouts.navbar')
-        <div class="my-12 flex justify-center">
+        <div class="mb-12 mt-8 flex justify-center">
             @yield('content')
         </div>
         @include('layouts.footer')
