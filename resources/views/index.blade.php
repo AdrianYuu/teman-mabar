@@ -9,7 +9,7 @@
             <div class="relative overflow-hidden rounded-lg md:h-96">
                 @foreach ($games as $game)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <a href="">
+                        <a href="{{ route('gameDetailPage', ['name' => $game->name]) }}">
                             <img src={{ $game->game_picture_url }}
                                 class="absolute left-1/2 top-1/2 block h-full w-full -translate-x-1/2 -translate-y-1/2 object-cover"
                                 alt="...">
@@ -58,7 +58,8 @@
                         </li>
                     @endforeach
                     <li>
-                        <a href="{{ route('gameListPage') }}" class="inline-block rounded-t-lg p-4 text-blue-500 hover:border-b-2">Lainnya...</a>
+                        <a href="{{ route('gameListPage') }}"
+                            class="inline-block rounded-t-lg p-4 text-blue-500 hover:border-b-2">Lainnya...</a>
                     </li>
                 </ul>
             </div>

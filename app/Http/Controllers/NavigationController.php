@@ -73,4 +73,16 @@ class NavigationController extends Controller
         return view('game-detail/index', compact('game'));
     }
 
+    public function playerListPage()
+    {
+        $users = User::all();
+        return view('player', compact('users'));
+    }
+
+    public function playerDetailPage($id)
+    {
+        $user = User::findOrFail($id);
+        return view('player-detail/index', compact('user'));
+    }
+
 }
