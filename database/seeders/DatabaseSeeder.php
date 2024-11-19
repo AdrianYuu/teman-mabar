@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
             GameGenreSeeder::class,
             GameSeeder::class,
             UserSeeder::class,
-            PaymentSeeder::class
+            PaymentSeeder::class,
+            ForumQuestionSeeder::class
         ]);
     }
 }

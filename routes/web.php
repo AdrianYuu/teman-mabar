@@ -10,6 +10,7 @@ use App\Http\Controllers\UserActivityController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPriceDetailController;
 use Illuminate\Support\Facades\Route;
+use Kreait\Firebase\DynamicLink\NavigationInfo;
 
 // Navigation
 Route::get('/', [NavigationController::class, 'indexPage'])->name('indexPage');
@@ -21,6 +22,8 @@ Route::get('/competition', [NavigationController::class, 'competitionPage'])->na
 Route::get('/competition/detail', [NavigationController::class, 'competitionDetailPage'])->name('competitionDetailPage');
 Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->name('gameDetailPage');
 Route::get('/player-detail/{id}', [NavigationController::class, 'playerDetailPage'])->name('playerDetailPage');
+
+Route::get('/forum', [NavigationController::class, 'forumPage'])->name('forumPage');
 
 // Auth
 Route::middleware(['guest'])->group(function() {

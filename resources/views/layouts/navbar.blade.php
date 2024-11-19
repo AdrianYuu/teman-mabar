@@ -114,17 +114,17 @@
                 </li>
                 <li>
                     <a href="{{ route('playerListPage') }}"
-                        class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
+                        class="{{ Request::is('player') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
                         aria-current="page">Teman Game</a>
                 </li>
                 <li>
-                    <a href="#"
+                    <a href="{{ route('competitionDetailPage') }}"
                         class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
                         aria-current="page">Kompetisi</a>
                 </li>
                 <li>
-                    <a href="#"
-                        class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
+                    <a href="{{ route('forumPage') }}"
+                        class="{{ Request::is('forum') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
                         aria-current="page">Forum</a>
                 </li>
                 @if (Auth::check() && Auth::user()->is_admin)
