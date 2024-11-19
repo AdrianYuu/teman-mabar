@@ -42,8 +42,8 @@
                 @endforeach
             </div>
         </div>
-        <div class="mt-6 flex items-center justify-center lg:justify-start">
-            <button type="button" class="w-full rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700 sm:w-auto">View more questions</button>
+        <div class="mt-6 flex flex-col items-center justify-center lg:justify-start">
+            {{ $forumQuestions->links('vendor.pagination.tailwind-custom') }}
         </div>
     </div>
 </section>
@@ -53,7 +53,7 @@
         <div class="relative rounded-lg bg-white shadow dark:bg-gray-800">
             <!-- Modal header -->
             <div class="flex items-center justify-between rounded-t border-b border-gray-200 p-4 dark:border-gray-700 md:p-5">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Ask a question</h3>
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">Buat Forum</h3>
                 <button type="button" class="ms-auto inline-flex h-8 w-8 items-center justify-center rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900 dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="question-modal">
                     <svg class="h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
@@ -62,62 +62,20 @@
                 </button>
             </div>
             <!-- Modal body -->
-            <form class="p-4 md:p-5">
+            <form action="{{ route('storeForumQuestion') }}" method="POST" class="p-4 md:p-5">
+                @csrf
                 <div class="mb-4 grid grid-cols-2 gap-4">
                     <div class="col-span-2">
-                        <label for="question" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Your question <span class="text-gray-500 dark:text-gray-400">(150-1000 characters)</span></label>
-                        <textarea id="question" rows="6" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" required=""></textarea>
-                    </div>
-                    <div class="col-span-2 grid gap-4 md:grid-cols-2">
-                        <div>
-                            <label for="question-type" class="mb-2 flex items-center text-sm font-medium text-gray-900 dark:text-white">
-                                <span class="me-1">Question type</span>
-                                <button type="button" data-tooltip-target="tooltip-dark" data-tooltip-style="dark" class="ml-1">
-                                    <svg aria-hidden="true" class="h-4 w-4 cursor-pointer text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span class="sr-only">Details</span>
-                                </button>
-                                <div id="tooltip-dark" role="tooltip" class="tooltip invisible absolute z-10 inline-block max-w-sm rounded-lg bg-gray-900 px-3 py-2 text-xs font-normal text-white opacity-0 shadow-sm dark:bg-gray-700">
-                                    Choose your question type to get a faster answer.
-                                    <div class="tooltip-arrow" data-popper-arrow></div>
-                                </div>
-                            </label>
-                            <select id="question-type" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                                <option value="technical">Technical Question</option>
-                                <option value="shipment">Shipment Question</option>
-                                <option value="payment">Payment Issue</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label for="priority-type" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Priority</label>
-                            <select id="priority-type" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                                <option value="very-high">Very High</option>
-                                <option value="high">High</option>
-                                <option value="medium">Medium</option>
-                                <option value="low">Low</option>
-                            </select>
-                        </div>
+                        <label for="title" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Judul Forum <span class="text-gray-500 dark:text-gray-400">(10-100 characters)</span></label>
+                        <input type="text" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Rekomendasi VGA Terbaik 2024" name="title"/>
                     </div>
                     <div class="col-span-2">
-                        <p class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Upload files <span class="text-gray-500 dark:text-gray-400">(Optional)</span></p>
-                        <div class="flex w-full items-center justify-center">
-                            <label for="dropzone-file" class="dark:hover:bg-bray-800 flex h-48 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                                <div class="flex flex-col items-center justify-center pb-6 pt-5">
-                                    <svg class="mb-4 h-8 w-8 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                                </div>
-                                <input id="dropzone-file" type="file" class="hidden" />
-                            </label>
-                        </div>
+                        <label for="question" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Pertanyaan <span class="text-gray-500 dark:text-gray-400">(50-1000 characters)</span></label>
+                        <textarea id="question" rows="6" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500 resize-none" placeholder="Saya memiliki VGA RTX2080 dan ingin mengganti ke VGA baru, VGA apakah yang bisa saya menggantikan performa VGA saya sekarang?" name="question"></textarea>
                     </div>
                     <div class="col-span-2">
                         <div class="flex items-center">
-                            <input id="link-checkbox" type="checkbox" value="" class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600" />
+                            <input id="link-checkbox" type="checkbox" value="1" class="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600" name="terms_agreement"/>
                             <label for="link-checkbox" class="ms-2 text-sm font-medium text-gray-500 dark:text-gray-400">I have read and agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
                         </div>
                     </div>

@@ -89,7 +89,7 @@ class NavigationController extends Controller
 
     public function forumPage()
     {
-        $forumQuestions = ForumQuestion::all();
+        $forumQuestions = ForumQuestion::paginate(10);
         Carbon::setLocale('id');
 
         return view('forum/index', compact('forumQuestions'));

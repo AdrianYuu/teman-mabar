@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForumQuestionController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameGenreController;
 use App\Http\Controllers\NavigationController;
@@ -24,6 +25,7 @@ Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->nam
 Route::get('/player-detail/{id}', [NavigationController::class, 'playerDetailPage'])->name('playerDetailPage');
 
 Route::get('/forum', [NavigationController::class, 'forumPage'])->name('forumPage');
+Route::post('/forum/store', [ForumQuestionController::class, 'store'])->name('storeForumQuestion');
 
 // Auth
 Route::middleware(['guest'])->group(function() {
