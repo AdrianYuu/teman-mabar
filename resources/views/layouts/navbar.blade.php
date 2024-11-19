@@ -131,7 +131,7 @@
                     <li>
                         <a href="{{ route('adminIndexPage') }}"
                             class="block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                            aria-current="page">Halaman Admin</a>
+                            aria-current="page">Admin</a>
                     </li>
                 @endif
             </ul>
