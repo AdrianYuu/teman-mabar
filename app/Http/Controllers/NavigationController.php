@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ForumQuestion;
 use App\Models\Game;
 use App\Models\GameGenre;
 use App\Models\User;
 use App\Models\UserPriceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class NavigationController extends Controller
 {
@@ -85,4 +87,11 @@ class NavigationController extends Controller
         return view('player-detail/index', compact('user'));
     }
 
+    public function forumPage()
+    {
+        $forumQuestions = ForumQuestion::all();
+        Carbon::setLocale('id');
+
+        return view('forum/index', compact('forumQuestions'));
+    }
 }
