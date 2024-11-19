@@ -87,9 +87,14 @@ class NavigationController extends Controller
         return view('player-detail/index', compact('user'));
     }
 
-    public function forumPage()
+    public function forumPage(Request $request)
     {
-        $forumQuestions = ForumQuestion::paginate(10);
+        if ($request->search) {
+            $forumQuestions = ForumQuestion::where('question', 'LIKE', '%'.$request->search.'%')->orWhere('title', 'LIKE', '%'.$request->search.'%')->paginate(10);
+        } else{
+            $forumQuestions = ForumQuestion::paginate(10);
+        }
+
         Carbon::setLocale('id');
 
         return view('forum/index', compact('forumQuestions'));
