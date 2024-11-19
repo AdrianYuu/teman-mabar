@@ -24,7 +24,8 @@ class StoreForumQuestionRequest extends FormRequest
     {
         return [
             'title' => 'required|string|min:10|max:100',
-            'question' => 'required|string|min:100|max:1000'
+            'question' => 'required|string|min:100|max:1000',
+            'terms' => 'accepted'
         ];
     }
 
@@ -41,7 +42,8 @@ class StoreForumQuestionRequest extends FormRequest
             'title.max' => 'Panjang judul maksimal 100 karakter.',
             'question.required' => 'Kolom pertanyaan harus diisi.',
             'question.min' => 'Panjang pertanyaan minimal 100 karakter.',
-            'question.max' => 'Panjang pertanyaan maksimal 1000 karakter.'
+            'question.max' => 'Panjang pertanyaan maksimal 1000 karakter.',
+            'terms.accepted' => 'Syarat dan ketentuan harus dibaca dan diisi.'
         ];
     }
 }

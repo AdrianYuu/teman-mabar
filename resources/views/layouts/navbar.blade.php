@@ -118,8 +118,8 @@
                         aria-current="page">Teman Game</a>
                 </li>
                 <li>
-                    <a href="{{ route('competitionDetailPage') }}"
-                        class="{{ Request::is('/?') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
+                    <a href="{{ route('competitionPage') }}"
+                        class="{{ Request::is('competition') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
                         aria-current="page">Kompetisi</a>
                 </li>
                 <li>

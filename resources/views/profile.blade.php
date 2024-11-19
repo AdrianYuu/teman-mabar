@@ -107,46 +107,50 @@
                     </div>
                 @endforelse
             </div>
+
             <div id="info-popup" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
                 <div class="relative p-4 w-full max-w-lg h-full md:h-auto">
-                    <form action="{{ route('storeUserPriceDetail') }}" method="POST" class="flex flex-col justify-between relative p-4 bg-white rounded-lg shadow  dark:bg-gray-800 md:p-8 gap-y-4">
+                    <form action="{{ route('storeUserPriceDetail') }}" method="POST" class="flex flex-col justify-between relative bg-white rounded-lg shadow dark:bg-gray-800 py-4">
                         @csrf
-                        <div class="text-sm font-light text-gray-500 dark:text-gray-400">
-                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white">Tambah Permainan</h3>
+                        <div class="flex items-center rounded-t border-b border-gray-200 px-8 dark:border-gray-700 md:px-0">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white pb-2">Tambah Permainan</h3>
                         </div>
-                        <div>
-                            <label for="game_id" class="mb-2 block text-sm text-gray-900 dark:text-white">Permainan</label>
-                            <select id="game_id" name="game_id"
-                            class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
-                                <option value="" selected>Please select one...</option>
-                                @foreach ($games as $game)
-                                    <option value={{ $game->id }} price_type={{ $game->price_type }}>{{ $game->name }}</option>
-                                @endforeach
-                            </select>
-                            @error('game_id', 'StoreUserPriceDetail')
-                                <p class="text-red-500 mt-2">{{ $message }}</p>
-                            @enderror
-                        </div>
-                        <div>
-                            <label for="price-type-disabled-input" class="block mb-2 text-sm text-gray-900 dark:text-white">Tipe</label>
-                            <input type="text" id="price-type-disabled-input" aria-label="disabled input" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
-                        </div>
-                        <div>
-                            <label for="price" class="block mb-2 text-sm text-gray-900 dark:text-white">Harga</label>
-                            <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="10" name="price"/>
-                            @error('price', 'StoreUserPriceDetail')
-                                <p class="text-red-500 mt-2">{{ $message }}</p>
-                            @enderror
-                        </div> 
-                        <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">
-                            <div class="justify-center items-center sm:space-x-4 sm:flex sm:space-y-0">
-                                <button id="close-modal" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Batal</button>
-                                <button id="confirm-button" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah</button>
+                        <div class="px-8 flex flex-col gap-y-4 mt-4">
+                            <div>
+                                <label for="game_id" class="mb-2 block text-sm text-gray-900 dark:text-white">Permainan</label>
+                                <select id="game_id" name="game_id"
+                                class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500">
+                                    <option value="" selected>Please select one...</option>
+                                    @foreach ($games as $game)
+                                        <option value={{ $game->id }} price_type={{ $game->price_type }}>{{ $game->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('game_id', 'StoreUserPriceDetail')
+                                    <p class="text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+                            <div>
+                                <label for="price-type-disabled-input" class="block mb-2 text-sm text-gray-900 dark:text-white">Tipe</label>
+                                <input type="text" id="price-type-disabled-input" aria-label="disabled input" class="bg-gray-200 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" disabled>
+                            </div>
+                            <div>
+                                <label for="price" class="block mb-2 text-sm text-gray-900 dark:text-white">Harga</label>
+                                <input type="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="10" name="price"/>
+                                @error('price', 'StoreUserPriceDetail')
+                                    <p class="text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div> 
+                            <div class="justify-between items-center pt-0 space-y-4 sm:flex sm:space-y-0">
+                                <div class="justify-center items-center sm:space-x-4 sm:flex sm:space-y-0">
+                                    <button id="close-modal" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Batal</button>
+                                    <button id="confirm-button" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Tambah</button>
+                                </div>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+
             <form action="{{ route('updateGamePrice') }}" method="POST" class="flex flex-col gap-4">
                 @method('PUT')
                 @csrf
