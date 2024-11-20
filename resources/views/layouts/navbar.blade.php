@@ -110,12 +110,12 @@
                 <li>
                     <a href="{{ route('gameListPage') }}"
                         class="{{ Request::is('game') || Request::is('game-detail') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Game</a>
+                        aria-current="page">Permainan</a>
                 </li>
                 <li>
                     <a href="{{ route('playerListPage') }}"
                         class="{{ Request::is('player') ? 'text-blue-700' : '' }} block rounded px-3 py-2 text-black hover:text-blue-700 md:bg-transparent md:p-0 md:dark:text-blue-500"
-                        aria-current="page">Teman Game</a>
+                        aria-current="page">Teman Bermain</a>
                 </li>
                 <li>
                     <a href="{{ route('competitionPage') }}"

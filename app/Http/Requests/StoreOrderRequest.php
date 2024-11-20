@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\EndsWithZeroMinutes;
+use App\Rules\WholeHourDifference;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreOrderRequest extends FormRequest
@@ -22,8 +24,8 @@ class StoreOrderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'start_time' => ['nullable', 'date', 'before:end_time'],
-            'end_time' => ['nullable', 'date', 'after:start_time'],
+            'start_time' => ['nullable', 'date', 'before:end_time', new EndsWithZeroMinutes()],
+            'end_time' => ['nullable', 'date', 'after:start_time', new WholeHourDifference(), new EndsWithZeroMinutes()],
             'total_match' => ['nullable', 'numeric', 'min:1']
         ];
     }
