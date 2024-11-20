@@ -25,9 +25,7 @@ Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->nam
 Route::get('/player-detail/{id}', [NavigationController::class, 'playerDetailPage'])->name('playerDetailPage');
 
 Route::get('/forum', [NavigationController::class, 'forumPage'])->name('forumPage');
-Route::post('/forum/store', [ForumQuestionController::class, 'store'])->name('storeForumQuestion');
 Route::get('/forum-detail/{id}', [NavigationController::class, 'forumDetailPage'])->name('forumDetailPage');
-Route::post('/forum-comment/store/{id}', [ForumCommentController::class, 'store'])->name('storeForumComment');
 
 // Auth
 Route::middleware(['guest'])->group(function() {
@@ -45,23 +43,27 @@ Route::middleware(['auth'])->group(function() {
     Route::post('/profile/user-price-detail/create', [UserPriceDetailController::class, 'store'])->name('storeUserPriceDetail');
     Route::put('/profile/user-price-detail/update', [UserPriceDetailController::class, 'update'])->name('updateGamePrice');
     Route::delete('/profile/user-price-detail/delete', [UserPriceDetailController::class, 'destroy'])->name('destroyUserPriceDetail');
+
+    Route::post('/forum/store', [ForumQuestionController::class, 'store'])->name('storeForumQuestion');
+    Route::post('/forum-comment/store/{id}', [ForumCommentController::class, 'store'])->name('storeForumComment');
+
+    Route::post('/order/create/{gameId}/{gamerUserId}', [OrderController::class, 'create'])->name('storeOrder');
+    Route::put('/order/edit/{id}', [OrderController::class, 'update'])->name('updateOrder');
+
+    Route::post('/competition/create', [CompetitionController::class, 'store'])->name('storeCompetition');
+    Route::post('/competition/join', [CompetitionController::class, 'join'])->name('joinCompetition');
+    Route::put('/competition/update', [CompetitionController::class, 'update'])->name('updateCompetition');
+    Route::get('/competition', [CompetitionController::class, 'index'])->name('competitionPage');
+    Route::get('/competition/create', [CompetitionController::class, 'create'])->name('createCompetitionPage');
+
+    Route::post('/manage-coin/top-up/create', [UserActivityController::class, 'topUpStore'])->name('storeTopUp');
 });
 
 // ORDER
 Route::get('/order', [OrderController::class, 'index'])->name('orderPage');
-Route::post('/order/create/{gameId}/{gamerUserId}', [OrderController::class, 'create'])->name('storeOrder');
-Route::put('/order/edit/{id}', [OrderController::class, 'update'])->name('updateOrder');
-
-// COMPETITION
-Route::get('/competition', [CompetitionController::class, 'index'])->name('competitionPage');
-Route::get('/competition/create', [CompetitionController::class, 'create'])->name('createCompetitionPage');
-Route::post('/competition/create', [CompetitionController::class, 'store'])->name('storeCompetition');
-Route::post('/competition/join', [CompetitionController::class, 'join'])->name('joinCompetition');
-Route::put('/competition/update', [CompetitionController::class, 'update'])->name('updateCompetition');
 
 // MANAGE COIN
 Route::get('/manage-coin', [UserActivityController::class, 'manageCoinPage'])->name('manageCoinPage');
-Route::post('/manage-coin/top-up/create', [UserActivityController::class, 'topUpStore'])->name('storeTopUp');
 
 // ADMIN
 Route::prefix('admin')->middleware(['admin'])->group(function () {
