@@ -72,6 +72,10 @@ class OrderController extends Controller
         $userPriceDetail = UserPriceDetail::where('user_id', $order->gamer_user_id)
                                             ->where('game_id', $order->game_id)->first();
 
+        $startTime = Carbon::parse($order->start_time);
+        $endTime = Carbon::parse($order->end_time);
+        $hourDifference = $startTime->diffInHours($endTime);
+
         $user = User::findOrFail($order->gamer_user_id);
         $game = Game::findOrFail($order->game_id);
 
@@ -81,7 +85,7 @@ class OrderController extends Controller
             ]);
         } else {
              $user->update([
-                'coin' => $user->coin + ($userPriceDetail->price)
+                'coin' => $user->coin + ($userPriceDetail->price * $hourDifference)
             ]);
         }
 
