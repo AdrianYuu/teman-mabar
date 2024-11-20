@@ -26,4 +26,14 @@ class Competition extends Model
     {
         return $this->belongsTo(User::class, 'organizer_user_id', 'id');
     }
+
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class, 'game_id', 'id');
+    }
+
+    public function competitionMembers(): HasMany
+    {
+        return $this->hasMany(competitionMember::class, 'competition_id', 'id');
+    }
 }

@@ -34,4 +34,9 @@ class Game extends Model
     {
         return $this->hasMany(Order::class, 'game_id', 'id');
     }
+
+    public function competitions(): HasMany
+    {
+        return $this->hasMany(Competition::class, 'competition_id', 'id');
+    }
 }

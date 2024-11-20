@@ -113,7 +113,7 @@
         </div>
 
         {{-- Top Player --}}
-        <div id="indicators-carousel" class="relative mt-12 w-full" data-carousel="static">
+        <div id="indicators-carousel" class="relative mt-12 w-full" data-carousel="slide">
             <!-- Carousel wrapper -->
             <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
                 <!-- Item 1 -->

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CompetitionController;
 use App\Http\Controllers\ForumCommentController;
 use App\Http\Controllers\ForumQuestionController;
 use App\Http\Controllers\GameController;
@@ -20,8 +21,6 @@ Route::get('/', [NavigationController::class, 'indexPage'])->name('indexPage');
 Route::get('/game', [NavigationController::class, 'gameListPage'])->name('gameListPage');
 Route::get('/player', [NavigationController::class, 'playerListPage'])->name('playerListPage');
 Route::get('/profile', [NavigationController::class, 'profilePage'])->name('profilePage');
-Route::get('/competition', [NavigationController::class, 'competitionPage'])->name('competitionPage');
-Route::get('/competition/detail', [NavigationController::class, 'competitionDetailPage'])->name('competitionDetailPage');
 Route::get('/game-detail', [NavigationController::class, 'gameDetailPage'])->name('gameDetailPage');
 Route::get('/player-detail/{id}', [NavigationController::class, 'playerDetailPage'])->name('playerDetailPage');
 
@@ -53,9 +52,16 @@ Route::get('/order', [OrderController::class, 'index'])->name('orderPage');
 Route::post('/order/create/{gameId}/{gamerUserId}', [OrderController::class, 'create'])->name('storeOrder');
 Route::put('/order/edit/{id}', [OrderController::class, 'update'])->name('updateOrder');
 
+// COMPETITION
+Route::get('/competition', [CompetitionController::class, 'index'])->name('competitionPage');
+Route::get('/competition/create', [CompetitionController::class, 'create'])->name('createCompetitionPage');
+Route::post('/competition/create', [CompetitionController::class, 'store'])->name('storeCompetition');
+Route::post('/competition/join', [CompetitionController::class, 'join'])->name('joinCompetition');
+Route::put('/competition/update', [CompetitionController::class, 'update'])->name('updateCompetition');
+
 // MANAGE COIN
 Route::get('/manage-coin', [UserActivityController::class, 'manageCoinPage'])->name('manageCoinPage');
-Route::post('/manage-coin/top-up/store', [UserActivityController::class, 'topUpStore'])->name('storeTopUp');
+Route::post('/manage-coin/top-up/create', [UserActivityController::class, 'topUpStore'])->name('storeTopUp');
 
 // ADMIN
 Route::prefix('admin')->middleware(['admin'])->group(function () {

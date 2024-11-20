@@ -19,10 +19,12 @@ return new class extends Migration
             $table->integer('coin_prize');
             $table->integer('coin_registration');
             $table->integer('maximum_team');
-            $table->date('registration_start_time');
-            $table->date('registration_end_time');
-            $table->date('competition_start_time');
-            $table->date('competition_end_time');
+            $table->string('type');
+            $table->timestamp('registration_start_time')->nullable();
+            $table->timestamp('registration_end_time')->nullable();
+            $table->timestamp('competition_start_time')->nullable();
+            $table->timestamp('competition_end_time')->nullable();
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
 
