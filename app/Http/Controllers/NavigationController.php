@@ -79,7 +79,7 @@ class NavigationController extends Controller
 
     public function playerListPage()
     {
-        $users = User::paginate(8);
+        $users = User::whereNot('is_admin', true)->paginate(8);
         return view('player', compact('users'));
     }
 

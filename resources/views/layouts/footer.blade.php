@@ -2,7 +2,7 @@
     <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div class="md:flex md:justify-between">
           <div class="mb-6 md:mb-0">
-                <a href="https://flowbite.com/" class="flex items-center">
+                <a href="{{ route('indexPage') }}" class="flex items-center">
                     <img src={{ asset('assets/images/logo.png') }} class="h-8 me-3" alt="TemanMabar Logo" />
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">TemanMabar</span>
                 </a>
@@ -12,13 +12,13 @@
                     <h2 class="mb-6 text-sm font-semibold text-gray-900 uppercase dark:text-white">Resources</h2>
                     <ul class="text-gray-500 dark:text-gray-400 font-medium">
                         <li class="mb-4">
-                            <a href="https://flowbite.com/" class="hover:underline">Teman</a>
+                            <a href="{{ route('playerListPage') }}" class="hover:underline">Teman</a>
                         </li>
                         <li class="mb-4">
-                            <a href="https://tailwindcss.com/" class="hover:underline">Kompetisi</a>
+                            <a href="{{ route('competitionPage') }}" class="hover:underline">Kompetisi</a>
                         </li>
                         <li>
-                            <a href="https://tailwindcss.com/" class="hover:underline">Isi Saldo</a>
+                            <a href="{{ route('manageCoinPage') }}" class="hover:underline">Isi Saldo</a>
                         </li>
                     </ul>
                 </div>

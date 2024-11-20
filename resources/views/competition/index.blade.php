@@ -131,8 +131,9 @@
                                     <form action="{{ route('joinCompetition', ['competition_id' => $competition->id]) }}"
                                         method="POST">
                                         @csrf
+                                        @if ($competition->status === 'Belum Selesai')
                                         <button type="submit"
-                                            class="@if ($isJoined) bg-gray-400 cursor-not-allowed @else bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 @endif w-full items-center justify-center rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white"
+                                            class="@if ($isJoined) cursor-not-allowed @else bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 @endif w-full items-center justify-center rounded-lg px-5 py-2.5 text-center text-sm font-medium text-white"
                                             @if ($isJoined) disabled @endif>
                                             @if ($isJoined)
                                                 Sudah terdaftar
@@ -140,6 +141,7 @@
                                                 Daftar
                                             @endif
                                         </button>
+                                        @endif
                                     </form>
                                 </div>
 
