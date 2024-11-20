@@ -29,7 +29,7 @@
                 class="h-full max-w-sm rounded-lg border border-gray-200 bg-white shadow dark:border-gray-700 dark:bg-gray-800">
                 <a href="#">
                     <img class="h-96 w-96 rounded-t-lg object-cover"
-                        src="{{ $user->profile_picture_url ?? asset('assets/images/profile-banner.jpg') }}"
+                        src="{{ $user->profile_picture_url ?? asset('assets/images/Profile-banner.jpg') }}"
                         alt="" />
                 </a>
 
