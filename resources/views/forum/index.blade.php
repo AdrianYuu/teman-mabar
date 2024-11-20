@@ -33,7 +33,7 @@
                                     <span class="inline-block rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-900 dark:text-green-300 md:mb-0"> {{ $question->answers_count }} answers </span>
                                 </div>
                                 <div class="flex justify-between">
-                                    <a href="#" class="text-xl font-semibold text-gray-900 hover:underline dark:text-white w-3/4">“{{ $question->title }}”</a>
+                                    <a href="{{ route('forumDetailPage', ['id'=>$question->id]) }}" class="text-xl font-semibold text-gray-900 hover:underline dark:text-white w-3/4">“{{ $question->title }}”</a>
                                     <p class="pt-1">{{ $question->created_at->translatedFormat('l, j F Y') }}</p>
                                 </div>
                             </div>

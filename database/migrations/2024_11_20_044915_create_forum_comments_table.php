@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('forum_answers', function (Blueprint $table) {
+        Schema::create('forum_comments', function (Blueprint $table) {
             $table->uuid('user_id');
             $table->uuid('forum_question_id');
+            $table->text('comment');
             $table->timestamps();
             
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('forum_answers');
+        Schema::dropIfExists('forum_comments');
     }
 };
