@@ -34,6 +34,6 @@ class Competition extends Model
 
     public function competitionMembers(): HasMany
     {
-        return $this->hasMany(competitionMember::class, 'competition_id', 'id');
+        return $this->hasMany(CompetitionMember::class, 'competition_id', 'id');
     }
 }
