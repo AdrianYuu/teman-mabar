@@ -17,7 +17,8 @@ class NavigationController extends Controller
     {
         $genres = GameGenre::all()->sortBy('name')->take(12);
         $games = Game::all();
-        return view('index', compact('genres', 'games'));
+        $users = User::all();
+        return view('index', compact('genres', 'games', 'users'));
     }
 
     public function loginPage()
@@ -37,9 +38,9 @@ class NavigationController extends Controller
 
         $genres = GameGenre::all();
         if(!$selectedGenre)
-            $games = Game::all();
+            $games = Game::paginate(8);
         else
-            $games = Game::where('genre_id', 'LIKE', $selectedGenreId)->get();
+            $games = Game::where('genre_id', 'LIKE', $selectedGenreId)->paginate(8);
 
         return view('game', compact('genres', 'games', 'selectedGenre'));
     }
@@ -77,7 +78,7 @@ class NavigationController extends Controller
 
     public function playerListPage()
     {
-        $users = User::all();
+        $users = User::paginate(8);
         return view('player', compact('users'));
     }
 

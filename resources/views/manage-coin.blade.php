@@ -1,6 +1,6 @@
 @extends('layouts.main-layout')
 
-@section('title', 'Manage Coin')
+@section('title', 'Atur Koin')
 
 @section('content')
 

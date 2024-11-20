@@ -16,12 +16,12 @@ class GameGenreSeeder extends Seeder
         $genres = [
             ['id' => Str::uuid(), 'name' => 'Action'],
             ['id' => Str::uuid(), 'name' => 'Adventure'],
-            ['id' => Str::uuid(), 'name' => 'Simulation'],
+            ['id' => Str::uuid(), 'name' => 'MOBA'],
             ['id' => Str::uuid(), 'name' => 'Sports'],
             ['id' => Str::uuid(), 'name' => 'Puzzle'],
             ['id' => Str::uuid(), 'name' => 'Horror'],
             ['id' => Str::uuid(), 'name' => 'Racing'],
-            ['id' => Str::uuid(), 'name' => 'Shooter'],
+            ['id' => Str::uuid(), 'name' => 'FPS'],
         ];
 
         DB::table('game_genres')->insert($genres);

@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\Order;
 use App\Models\User;
 use App\Models\UserPriceDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -28,10 +29,14 @@ class OrderController extends Controller
         $game = Game::findOrFail($gameId);
         $userPriceDetail = UserPriceDetail::where('user_id', $gamerUserId)->where('game_id', $gameId)->first();
 
+        $startTime = Carbon::parse($request->start_time);
+        $endTime = Carbon::parse($request->end_time);
+        $hourDifference = $startTime->diffInHours($endTime);
+
         if($game->price_type == "Match"){
             $totalPrice = $userPriceDetail->price * $request->total_match;
         } else {
-            $totalPrice = $userPriceDetail->price;
+            $totalPrice = $userPriceDetail->price * $hourDifference;
         }
 
         if($currentUser->coin < $totalPrice){
