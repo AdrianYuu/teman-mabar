@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CompetitionController;
+use App\Http\Controllers\ForumCommentController;
 use App\Http\Controllers\ForumQuestionController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\GameGenreController;
@@ -25,6 +26,8 @@ Route::get('/player-detail/{id}', [NavigationController::class, 'playerDetailPag
 
 Route::get('/forum', [NavigationController::class, 'forumPage'])->name('forumPage');
 Route::post('/forum/store', [ForumQuestionController::class, 'store'])->name('storeForumQuestion');
+Route::get('/forum-detail/{id}', [NavigationController::class, 'forumDetailPage'])->name('forumDetailPage');
+Route::post('/forum-comment/store/{id}', [ForumCommentController::class, 'store'])->name('storeForumComment');
 
 // Auth
 Route::middleware(['guest'])->group(function() {
