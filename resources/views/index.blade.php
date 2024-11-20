@@ -120,7 +120,7 @@
                 @foreach ($users as $user)
                     <div class="hidden duration-700 ease-in-out" data-carousel-item="active">
                         <a href="{{ route('playerDetailPage', ['id' => $user->id]) }}"> <img
-                                src={{ $user->profile_picture_url ?? asset('assets/images/profile-banner.jpg') }}
+                                src={{ $user->profile_picture_url ?? asset('assets/images/Profile-banner.jpg') }}
                                 class="absolute left-1/2 top-1/2 block w-full -translate-x-1/2 -translate-y-1/2"
                                 alt="..."></a>
                     </div>
