@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ForumComment;
 use App\Models\ForumQuestion;
 use App\Models\Game;
 use App\Models\GameGenre;
@@ -99,5 +100,15 @@ class NavigationController extends Controller
         Carbon::setLocale('id');
 
         return view('forum/index', compact('forumQuestions'));
+    }
+
+    public function forumDetailPage($id)
+    {
+        $question = ForumQuestion::findOrFail($id);
+        $comments = ForumComment::with('user')->where('forum_question_id', $question->id)->get();
+
+        Carbon::setLocale('id');
+
+        return view('forum/detail', compact('question', 'comments'));
     }
 }
