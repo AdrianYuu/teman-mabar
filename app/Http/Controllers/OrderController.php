@@ -41,7 +41,7 @@ class OrderController extends Controller
 
         if($currentUser->coin < $totalPrice){
             return redirect()->route('gameDetailPage', ['name' => $game->name])
-                            ->withErrors(['coin' => 'You do not have enough coins to complete this order.']);
+                            ->withErrors(['coin' => 'Kamu tidak memiliki cukup koin.']);
         }
 
         $user = User::findOrFail($currentUser->id);

@@ -55,7 +55,7 @@ class CompetitionController extends Controller
 
         if(Auth::user()->coin < $competition->coin_registration){
             return redirect()->route('competitionPage')
-                            ->withErrors(['coin' => 'You do not have enough coins to join this competition.']);
+                            ->withErrors(['coin' => 'Kamu tidak memiliki koin yang cukup.']);
         }
 
          CompetitionMember::create([
