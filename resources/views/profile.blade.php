@@ -112,16 +112,10 @@
                     </div>
                     <div class="hidden rounded-lg bg-gray-50 p-4 dark:bg-gray-800" id="album" role="tabpanel"
                         aria-labelledby="dashboard-tab">
-                        <div class="grid grid-cols-3 gap-2">
+                        {{-- <div class="grid grid-cols-3 gap-2">
                             <img class="h-full w-full rounded-lg shadow-xl dark:shadow-gray-800"
                                 src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                            <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800"
-                                src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                            <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800"
-                                src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                            <img class="h-auto w-full rounded-lg shadow-xl dark:shadow-gray-800"
-                                src="{{ asset('assets/images/profile-picture.jpg') }}" alt="image description">
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
