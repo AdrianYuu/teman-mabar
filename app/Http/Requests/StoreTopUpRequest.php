@@ -26,4 +26,19 @@ class StoreTopUpRequest extends FormRequest
             'payment_id' => ['required']
         ];
     }
+
+    /**
+     * Get custom messages for validation errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'coin_amount.required' => 'Kolom jumlah koin harus diisi.',
+            'coin_amount.numeric' => 'Jumlah koin harus berupa angka.',
+            'coin_amount.min' => 'Jumlah koin harus lebih dari 0.',
+            'payment_id.required' => 'Kolom metode pembayaran harus diisi.'
+        ];
+    }
 }
