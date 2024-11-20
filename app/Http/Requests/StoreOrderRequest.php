@@ -25,7 +25,7 @@ class StoreOrderRequest extends FormRequest
     {
         return [
             'start_time' => ['nullable', 'date', 'before:end_time', new EndsWithZeroMinutes()],
-            'end_time' => ['nullable', 'date', 'after:start_time', new WholeHourDifference(), new EndsWithZeroMinutes()],
+            'end_time' => ['nullable', 'date', 'after:start_time', new EndsWithZeroMinutes()],
             'total_match' => ['nullable', 'numeric', 'min:1']
         ];
     }

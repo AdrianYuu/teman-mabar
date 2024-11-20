@@ -3,10 +3,9 @@
 @section('title', 'Daftar')
 
 @section('content')
-    <div class="flex h-full w-4/5 flex-col p-12 md:flex-row">
-        <div class="flex w-full flex-col items-center md:w-1/2"> {{-- Left Side --}}
-            <img src={{ asset('assets/images/login/left-side-image.png') }} class="hidden w-full md:block"
-                alt="Left Side Image">
+    <div class="flex h-full flex-col md:flex-row">
+        <div class="flex h-full w-full flex-col items-center"> {{-- Left Side --}}
+            <img src={{ asset('assets/images/login/left-side-image.png') }} class="h-full w-full" alt="Left Side Image">
         </div>
         <div class="flex w-full flex-col justify-center rounded-br-xl rounded-tr-xl bg-slate-200 md:w-1/2">
             {{-- Right Side --}}
@@ -133,21 +132,6 @@
                 <button type="submit"
                     class="mt-4 w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Daftar</button>
             </form>
-            <div class="my-4 flex items-center">
-                <hr class="ml-32 flex-1 border-t border-gray-800" />
-                <span class="mx-4 rounded-full px-3 text-lg font-semibold text-gray-900">atau masuk dengan</span>
-                <hr class="mr-32 flex-1 border-t border-gray-800" />
-            </div>
-            <div class="flex flex-row justify-center gap-8">
-                <a href=""><img src={{ asset('assets/images/login/google.png') }} class="h-12 w-12 rounded-full"
-                        alt="Google"></a>
-                <a href=""><img src={{ asset('assets/images/login/x.png') }} class="h-12 w-12 rounded-full"
-                        alt="X"></a>
-                <a href=""><img src={{ asset('assets/images/login/apple.jpg') }} class="h-12 w-12 rounded-full"
-                        alt="Apple"></a>
-                <a href=""><img src={{ asset('assets/images/login/facebook.png') }} class="h-12 w-12 rounded-full"
-                        alt="Facebook"></a>
-            </div>
             <p class="mt-6 text-center">Sudah punya akun? <a href="{{ route('loginPage') }}"
                     class="font-medium text-blue-500">Login disini</a></p>
         </div>

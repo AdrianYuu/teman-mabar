@@ -86,4 +86,9 @@ class User extends Model implements AuthenticatableContract
     {
         return $this->hasMany(UserSubscribe::class, 'subscribed_user_id', 'id');
     }
+
+    public function competitionMembers(): HasMany
+    {
+        return $this->hasMany(CompetitionTeam::class, 'player_id', 'id');
+    }
 }
