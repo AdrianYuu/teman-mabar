@@ -97,7 +97,7 @@
         {{--  --}}
         <div class="mt-8 w-full">
             <iframe 
-                width="100%" 
+                width="100%"
                 height="500" 
                 src="https://www.youtube.com/embed/PxLcsNuF3SM?autoplay=1" 
                 title="Video Teman Mabar" 
@@ -118,6 +118,5 @@
                 <p>"Game lebih seru ketika dimainkan bersama teman."</p>
             </blockquote>
         </div>
-
     </div>
 @endsection
